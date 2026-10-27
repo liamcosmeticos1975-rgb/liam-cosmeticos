@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#174d32">
+<title>LIAM Cosméticos Veganos | Sitio Oficial y Pedidos</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            50: '#edf4e8',
+            100: '#dcebd5',
+            200: '#c8d9c5',
+            500: '#2f7048',
+            800: '#174d32',
+            900: '#18261c',
+            cream: '#fffdf5',
+          }
+        },
+        fontFamily: {
+          serif: ['"Playfair Display"', 'Georgia', 'serif'],
+          sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body {
+    background-color: #fffdf5;
+    color: #18261c;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+  .serif-title {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #edf4e8;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #174d32;
+    border-radius: 9999px;
+  }
+</style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-100 selection:text-brand-800">
+
+  <!-- Header (Diseño 1) -->
+  <header class="bg-gradient-to-b from-brand-50 to-brand-cream border-b-2 border-brand-800 text-center py-6 px-4 shadow-sm relative">
+    <div class="max-w-4xl mx-auto">
+      <span class="inline-block px-3 py-1 bg-brand-100 text-brand-800 text-xs font-semibold rounded-full uppercase tracking-wider mb-2">100% Vegano & Natural</span>
+      <h1 class="serif-title text-4xl sm:text-5xl md:text-6xl font-bold text-brand-800 tracking-wide">LIAM</h1>
+      <p class="serif-title italic text-lg sm:text-xl text-brand-500 font-medium">Cosméticos Veganos</p>
+      <p class="text-xs sm:text-sm text-brand-900/70 font-medium mt-1">Chamical · La Rioja, Argentina</p>
+    </div>
+  </header>
+
+  <!-- Sticky Bar: Navigation, Depot Selector & Float Cart Counter -->
+  <div class="sticky top-0 z-40 bg-brand-cream/95 backdrop-blur-md border-b border-brand-200 py-2.5 px-4 shadow-sm transition-all duration-300">
+    <div class="max-w-4xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <!-- Nav Tabs -->
+      <nav class="flex items-center gap-1 bg-brand-100/60 p-1 rounded-xl border border-brand-200">
+        <button type="button" onclick="showSection('inicio')" id="nav-inicio" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-brand-800 text-white shadow-xs">Inicio</button>
+        <button type="button" onclick="showSection('beneficios')" id="nav-beneficios" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-brand-800 hover:bg-brand-100">Guía y Beneficios</button>
+        <button type="button" onclick="showSection('pedidos')" id="nav-pedidos" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-brand-800 hover:bg-brand-100 relative">
+          Tienda & Pedidos
+          <span id="floating-cart-badge" class="absolute -top-1 -right-1 bg-emerald-600 text-white text-[10px] font-bold px-1.5 py-0.2 rounded-full hidden">0</span>
+        </button>
+      </nav>
+
+      <!-- Dual Depot Selector (Diseño 2) -->
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-bold text-brand-800 hidden sm:inline">Depósito:</span>
+        <button id="btn-dep-rioja" type="button" class="px-3 py-1.5 text-xs font-bold rounded-lg border border-brand-800 transition-all bg-brand-800 text-white shadow-sm">
+          📦 La Rioja
+        </button>
+        <button id="btn-dep-bsas" type="button" class="px-3 py-1.5 text-xs font-bold rounded-lg border border-brand-800 transition-all bg-white text-brand-800 hover:bg-brand-50">
+          📦 Bs As (Moreno)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <main class="max-w-4xl w-full mx-auto p-4 sm:p-6 flex-grow">
+
+    <!-- SECCIÓN INICIO -->
+    <section id="inicio" class="space-y-6">
+      <div class="bg-gradient-to-br from-brand-50 via-white to-brand-cream border border-brand-200 rounded-2xl p-6 sm:p-10 text-center shadow-sm relative overflow-hidden">
+        <span class="inline-block px-3 py-1 bg-white border border-brand-200 text-brand-800 text-xs font-bold rounded-full mb-4 shadow-xs">🌿 Cosmética vegana y artesanal</span>
+        <h2 class="serif-title text-2xl sm:text-4xl font-bold text-brand-800 mb-3">Bienvenidos a LIAM</h2>
+        <p class="text-brand-900/80 text-sm sm:text-base max-w-xl mx-auto mb-8 leading-relaxed">
+          Conocé en detalle los beneficios de nuestras cremas, aceites y jabones naturales, sus propiedades, modos de uso, precauciones y explorá nuestro catálogo con stock en tiempo real para armar tu pedido.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto">
+          <button type="button" onclick="showSection('beneficios')" class="px-5 py-3.5 bg-white border-2 border-brand-800 text-brand-800 font-bold text-sm rounded-xl hover:bg-brand-50 transition-all shadow-sm">
+            🌱 Guía y Beneficios
+          </button>
+          <button type="button" onclick="showSection('pedidos')" class="px-5 py-3.5 bg-brand-800 text-white font-bold text-sm rounded-xl hover:bg-brand-500 transition-all shadow-md">
+            🛒 Hacer un pedido
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN BENEFICIOS (Layout e información del Diseño 1) -->
+    <section id="beneficios" class="hidden space-y-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4">
+        <div>
+          <h2 class="serif-title text-2xl font-bold text-brand-800">🌿 Guía Completa de Beneficios</h2>
+          <p class="text-xs text-brand-900/70">Seleccioná una categoría y producto para consultar sus propiedades específicas y modo de uso.</p>
+        </div>
+        <button type="button" onclick="showSection('inicio')" class="text-xs font-semibold px-3 py-1.5 border border-brand-200 bg-white rounded-lg hover:bg-brand-50 text-brand-800">← Inicio</button>
+      </div>
+
+      <!-- Selector de categoría de beneficios -->
+      <div class="flex gap-2 border-b border-brand-200 pb-2">
+        <button id="btn-guide-cremas" onclick="switchGuideTab('cremas')" type="button" class="px-4 py-2 text-xs font-bold rounded-lg border bg-brand-800 text-white border-brand-800">🌿 Cremas</button>
+        <button id="btn-guide-aceites" onclick="switchGuideTab('aceites')" type="button" class="px-4 py-2 text-xs font-bold rounded-lg border bg-brand-50 text-brand-800 border-brand-200">🌱 Aceites</button>
+        <button id="btn-guide-jabones" onclick="switchGuideTab('jabones')" type="button" class="px-4 py-2 text-xs font-bold rounded-lg border bg-brand-50 text-brand-800 border-brand-200">🍃 Jabones</button>
+      </div>
+
+      <!-- Tabs de productos según categoría -->
+      <div id="guide-products-tabs" class="flex flex-wrap gap-2"></div>
+
+      <!-- Detalle de Producto de la Guía -->
+      <div id="guide-detalle-content" class="bg-white border border-brand-200 rounded-2xl p-6 shadow-sm space-y-3"></div>
+
+      <!-- Bloques de Modo de Uso y Precauciones Generales (Diseño 1) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-white border border-brand-200 rounded-2xl p-5 shadow-sm space-y-2">
+          <h3 class="font-bold text-brand-800 border-b border-brand-100 pb-2">📌 Modo de uso general</h3>
+          <p class="text-xs text-brand-900/80 leading-relaxed">Aplicar una pequeña cantidad sobre piel limpia y seca con masajes suaves hasta su total absorción. Uso externo únicamente. Uso diario. Conservar en lugar fresco y seco, alejado del sol y del calor.</p>
+        </div>
+        <div class="bg-white border border-brand-200 rounded-2xl p-5 shadow-sm space-y-2">
+          <h3 class="font-bold text-brand-800 border-b border-brand-100 pb-2">⚠️ Precauciones generales</h3>
+          <ul class="text-xs text-brand-900/80 space-y-1 list-disc pl-4">
+            <li>No aplicar sobre heridas abiertas, quemaduras recientes, mucosas ni ojos.</li>
+            <li>No usar en embarazo, lactancia y menores de 3 años sin consulta médica (Jarilla + Mentol no usar en menores de 6 años).</li>
+            <li>Suspender uso en caso de irritación, enrojecimiento o picazón.</li>
+            <li>Producto cosmético natural. No reemplaza tratamiento médico.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN PEDIDOS (Diseño 2 con Sistema Dual) -->
+    <section id="pedidos" class="hidden space-y-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-3">
+        <div>
+          <h2 class="serif-title text-2xl font-bold text-brand-800">🛒 Catálogo y Stock en Tiempo Real</h2>
+          <p class="text-xs text-brand-900/70">Mostrando disponibilidad para el depósito de: <span id="dep-label" class="font-bold text-brand-800">La Rioja</span></p>
+        </div>
+        <button type="button" onclick="showSection('inicio')" class="text-xs font-semibold px-3 py-1.5 border border-brand-200 bg-white rounded-lg hover:bg-brand-50 text-brand-800">← Inicio</button>
+      </div>
+
+      <!-- Categorías -->
+      <div class="space-y-3">
+        <h3 class="text-xs font-bold text-brand-800 uppercase tracking-wider">Categorías de productos</h3>
+        <nav id="category-tabs-container" class="grid grid-cols-3 gap-2">
+          <button type="button" data-cat="cremas" class="tab active bg-brand-800 text-white font-semibold py-2.5 px-3 rounded-xl text-xs sm:text-sm transition-all border border-brand-800 text-center">🌿 Cremas</button>
+          <button type="button" data-cat="aceites" class="tab bg-brand-50 text-brand-800 font-semibold py-2.5 px-3 rounded-xl text-xs sm:text-sm transition-all border border-brand-200 text-center hover:bg-brand-100">🌱 Aceites</button>
+          <button type="button" data-cat="jabones" class="tab bg-brand-50 text-brand-800 font-semibold py-2.5 px-3 rounded-xl text-xs sm:text-sm transition-all border border-brand-200 text-center hover:bg-brand-100">🍃 Jabones</button>
+        </nav>
+      </div>
+
+      <!-- Tamaños y Títulos -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <h4 id="category-title" class="text-sm font-bold text-brand-800">Cremas</h4>
+          <span class="text-xs text-brand-900/60">Presentación:</span>
+        </div>
+        <div id="size-tabs" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <!-- Grilla de Productos con Desplegable "Más Info & Precauciones" -->
+      <div id="products-panel" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+
+      <!-- Carrito Independiente por Depósito -->
+      <div class="bg-white border border-brand-200 rounded-2xl p-5 sm:p-6 shadow-sm space-y-4">
+        <div class="flex items-center justify-between border-b border-brand-100 pb-3">
+          <h3 class="serif-title text-xl font-bold text-brand-800">🛒 Tu pedido independiente</h3>
+          <button id="clear" type="button" class="text-xs text-rose-600 font-semibold hover:underline">Vaciar pedido</button>
+        </div>
+        <div id="cart" class="divide-y divide-brand-100"><p class="text-xs text-brand-900/60 py-2 italic">Todavía no agregaste productos.</p></div>
+        <div class="pt-2 border-t border-brand-200 flex items-center justify-between">
+          <span class="text-sm font-semibold text-brand-900/80">Total del depósito seleccionado:</span>
+          <span id="total" class="serif-title text-2xl font-bold text-brand-800">$0</span>
+        </div>
+      </div>
+
+      <!-- Formulario Simplificado WhatsApp (con opciones de entrega extra) -->
+      <div class="bg-white border border-brand-200 rounded-2xl p-5 sm:p-6 shadow-sm space-y-4">
+        <h3 class="serif-title text-xl font-bold text-brand-800 border-b border-brand-100 pb-2">📦 Tus datos de envío</h3>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-brand-800 mb-1">Nombre</label>
+            <input id="nombre" type="text" placeholder="Tu nombre" class="w-full text-sm border border-brand-200 rounded-xl p-3 bg-brand-cream/30 focus:outline-none focus:border-brand-800">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-brand-800 mb-1">Localidad</label>
+            <input id="localidad" type="text" placeholder="¿De dónde sos?" class="w-full text-sm border border-brand-200 rounded-xl p-3 bg-brand-cream/30 focus:outline-none focus:border-brand-800">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-brand-800 mb-1">Método de Entrega</label>
+            <select id="entrega" class="w-full text-sm border border-brand-200 rounded-xl p-3 bg-brand-cream/30 font-semibold text-brand-800 focus:outline-none focus:border-brand-800">
+              <option value="Coordinar por WhatsApp">Coordinar por WhatsApp</option>
+              <option value="Retiro en local/depósito">Retiro en local/depósito</option>
+              <option value="Envío a domicilio (Local)">Envío a domicilio (Local)</option>
+              <option value="Envío a todo el país (Correo/Encomienda)">Envío a todo el país (Correo/Encomienda)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-brand-800 mb-1">Enviar pedido a</label>
+            <select id="destino" class="w-full text-sm border border-brand-200 rounded-xl p-3 bg-brand-cream/30 font-semibold text-brand-800 focus:outline-none focus:border-brand-800">
+              <option value="5493826512455">La Rioja · 3826 51-2455</option>
+              <option value="5491122547458">Buenos Aires · 11 2254-7458</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-brand-800 mb-1">Comentario (opcional)</label>
+          <textarea id="comentario" rows="2" placeholder="Aclaraciones, consulta, etc." class="w-full text-sm border border-brand-200 rounded-xl p-3 bg-brand-cream/30 focus:outline-none focus:border-brand-800"></textarea>
+        </div>
+
+        <div class="pt-2 flex flex-col gap-3">
+          <button id="btn-send-wa" type="button" class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+            <span>📱 Enviar pedido por WhatsApp</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Personalizado -->
+  <div id="custom-modal" class="fixed inset-0 bg-brand-900/50 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-white border border-brand-200 rounded-2xl p-6 max-w-sm w-full text-center space-y-4 shadow-xl">
+      <div class="text-3xl">🌿</div>
+      <p id="modal-msg" class="text-sm font-semibold text-brand-900 leading-relaxed"></p>
+      <button id="modal-close-btn" type="button" class="w-full py-2.5 bg-brand-800 text-white font-bold text-sm rounded-xl hover:bg-brand-500 transition-all">Aceptar</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-brand-50 border-t border-brand-200 text-center py-6 px-4 text-xs text-brand-800/80 font-medium">
+    <div class="max-w-4xl mx-auto space-y-1">
+      <p class="font-bold text-brand-800">LIAM Cosméticos Veganos</p>
+      <p>Hecho con cariño en La Rioja 🌿</p>
+    </div>
+  </footer>
+
+  <!-- Script de Lógica -->
+  <script>
+    // Stock Dual por Depósito
+    const STOCK = {
+      rioja: {
+        "Caléndula|20 g": 15, "Palán Palán|20 g": 15, "Manzanilla|20 g": 15, "Jarilla|20 g": 15, "Jarilla + Mentol|20 g": 10, "Rosa Mosqueta|20 g": 10,
+        "Caléndula|30 g": 15, "Palán Palán|30 g": 15, "Manzanilla|30 g": 15, "Jarilla|30 g": 15, "Jarilla + Mentol|30 g": 10, "Rosa Mosqueta|30 g": 10,
+        "Caléndula|50 g": 15, "Palán Palán|50 g": 15, "Manzanilla|50 g": 15, "Jarilla|50 g": 15, "Jarilla + Mentol|50 g": 8, "Rosa Mosqueta|50 g": 8,
+        "Jarilla|15 cc": 20, "Romero|15 cc": 20, "Orégano|15 cc": 20,
+        "Jarilla|30 cc": 20, "Romero|30 cc": 20, "Orégano|30 cc": 20,
+        "Jarilla|45 cc": 15, "Romero|45 cc": 15, "Orégano|45 cc": 15,
+        "Manzanilla|40 g": 10, "Caléndula|40 g": 10, "Jarilla|40 g": 10, "Café|40 g": 10, "Avena|40 g": 10, "Rosa mosqueta|40 g": 10,
+        "Café|60 g": 10, "Jarilla|60 g": 10, "Avena|60 g": 10, "Manzanilla|60 g": 10, "Caléndula|60 g": 10, "Rosa mosqueta|60 g": 10, "Carbón activado|60 g": 10,
+        "Avena|90 g": 10, "Rosa mosqueta|90 g": 10, "Café|90 g": 10, "Jarilla con esponja vegetal|90 g": 10, "Carbón activado|90 g": 10
+      },
+      bsas: {
+        "Caléndula|20 g": 2, "Palán Palán|20 g": 0, "Manzanilla|20 g": 3, "Jarilla|20 g": 5, "Jarilla + Mentol|20 g": 0, "Rosa Mosqueta|20 g": 1,
+        "Caléndula|30 g": 1, "Palán Palán|30 g": 2, "Manzanilla|30 g": 0, "Jarilla|30 g": 3, "Jarilla + Mentol|30 g": 2, "Rosa Mosqueta|30 g": 0,
+        "Caléndula|50 g": 4, "Palán Palán|50 g": 2, "Manzanilla|50 g": 1, "Jarilla|50 g": 6, "Jarilla + Mentol|50 g": 3, "Rosa Mosqueta|50 g": 0,
+        "Jarilla|15 cc": 5, "Romero|15 cc": 3, "Orégano|15 cc": 2,
+        "Jarilla|30 cc": 3, "Romero|30 cc": 2, "Orégano|30 cc": 1,
+        "Jarilla|45 cc": 2, "Romero|45 cc": 1, "Orégano|45 cc": 0,
+        "Manzanilla|40 g": 2, "Caléndula|40 g": 2, "Jarilla|40 g": 2, "Café|40 g": 2, "Avena|40 g": 2, "Rosa mosqueta|40 g": 1,
+        "Café|60 g": 2, "Jarilla|60 g": 2, "Avena|60 g": 2, "Manzanilla|60 g": 2, "Caléndula|60 g": 2, "Rosa mosqueta|60 g": 1, "Carbón activado|60 g": 2,
+        "Avena|90 g": 1, "Rosa mosqueta|90 g": 1, "Café|90 g": 1, "Jarilla con esponja vegetal|90 g": 1, "Carbón activado|90 g": 1
+      }
+    };
+
+    let depositoActual = 'rioja';
+    let cart = new Map(); // Carrito independiente por depósito
+
+    function getStock(dep, name, size) {
+      return STOCK[dep][name + "|" + size] ?? 0;
+    }
+
+    function setDeposito(dep) {
+      depositoActual = dep;
+      const isRioja = dep === 'rioja';
+      
+      document.getElementById('btn-dep-rioja').className = isRioja 
+        ? "px-3 py-1.5 text-xs font-bold rounded-lg border border-brand-800 transition-all bg-brand-800 text-white shadow-sm"
+        : "px-3 py-1.5 text-xs font-bold rounded-lg border border-brand-800 transition-all bg-white text-brand-800 hover:bg-brand-50";
+
+      document.getElementById('btn-dep-bsas').className = !isRioja 
+        ? "px-3 py-1.5 text-xs font-bold rounded-lg border border-brand-800 transition-all bg-brand-800 text-white shadow-sm"
+        : "px-3 py-1.5 text-xs font-bold rounded-lg border border-brand-800 transition-all bg-white text-brand-800 hover:bg-brand-50";
+
+      document.getElementById('dep-label').textContent = isRioja ? 'La Rioja' : 'Buenos Aires (Moreno)';
+      document.getElementById('destino').value = isRioja ? '5493826512455' : '5491122547458';
+      
+      renderProducts();
+      renderCart();
+    }
+
+    document.getElementById('btn-dep-rioja').addEventListener('click', () => setDeposito('rioja'));
+    document.getElementById('btn-dep-bsas').addEventListener('click', () => setDeposito('bsas'));
+
+    function showAlert(msg) {
+      document.getElementById('modal-msg').textContent = msg;
+      document.getElementById('custom-modal').classList.remove('hidden');
+    }
+    document.getElementById('modal-close-btn').addEventListener('click', () => {
+      document.getElementById('custom-modal').classList.add('hidden');
+    });
+
+    // Bases de Conocimiento de Beneficios y Precauciones Especificos (Diseño 1)
+    const beneficiosData = {
+      cremas: {
+        calendula: { title: "Caléndula", short: "Regeneradora y cicatrizante. Ideal piel sensible, bebés y embarazadas.", full: "Regeneradora y cicatrizante por excelencia. Estimula la producción de colágeno. Ideal para piel sensible, con irritaciones, dermatitis del pañal, acné inflamado, quemaduras solares, cortes superficiales." },
+        palan: { title: "Palán Palán", short: "Desinflamante natural potente, uso ancestral riojano.", full: "Perfecta para dolores musculares, articulares, golpes, hinchazón, forúnculos, abscesos, hemorroides. Acción antiséptica, antibacteriana y calmante." },
+        manzanilla: { title: "Manzanilla", short: "Ultra calmante y anti-alérgica. Para pieles sensibles y rosácea.", full: "Rica en bisabolol y chamazuleno. Para pieles ultra sensibles, con rosácea, picazón, dermatitis, alergias, piel irritada por frío o depilación." },
+        jarilla: { title: "Jarilla", short: "Descontracturante natural, purificante y antioxidante.", full: "Alivia dolor de ciático, contracturas y tensión muscular. Antioxidante y purificante profundo. Limpia poros, regula grasa, combate hongos." },
+        mentol: { title: "Jarilla + Mentol", short: "Descontracturante potente con efecto frío analgésico.", full: "Todo lo de Jarilla + efecto frío analgésico del mentol. Descongestiona vías respiratorias, alivia dolor de cabeza, piernas cansadas, picaduras." },
+        rosa: { title: "Rosa Mosqueta", short: "La premium despigmentante y anti-age para cicatrices y estrías.", full: "Regenera colágeno, borra cicatrices, estrías y líneas finas. Anti-manchas, anti-arrugas y extra hidratante. Con vitaminas A, C y E." }
+      },
+      aceites: {
+        jarilla: { title: "Aceite de Jarilla", short: "Antiinflamatorio para dolores musculares, reuma y golpes.", full: "Antiinflamatorio para dolores musculares y articulares, alivia reuma y golpes, antifúngico, regula piel grasa y acné, fortalece el cabello." },
+        romero: { title: "Aceite de Romero", short: "Estimulante circulatorio y capilar, alivia tensiones.", full: "Estimulante de la circulación sanguínea, promueve el crecimiento del cabello y combate su caída, mejora la concentración, alivia dolores musculares." },
+        oregano: { title: "Aceite de Orégano", short: "Antifúngico potente, refuerza defensas y alivia dolores.", full: "Antifúngico potente para hongos de uñas y pies, alivia dolores musculares, refuerza defensas, combate acné y caspa." }
+      },
+      jabones: {
+        manzanilla: { title: "Jabón de Manzanilla", short: "Calmante y antiinflamatorio para pieles sensibles y rosácea.", full: "Desinflama pieles sensibles, alivia rojeces, rosácea e irritaciones por quemaduras solares o depilación. Aporta suavidad extrema." },
+        calendula: { title: "Jabón de Caléndula", short: "Regenerador y cicatrizante natural para pieles delicadas.", full: "Estimula la renovación celular, reduce la inflamación y suaviza zonas secas o agrietadas. Ideal pieles sensibles." },
+        jarilla: { title: "Jabón de Jarilla", short: "Purificante, antiséptico y desodorante natural.", full: "Ayuda a regular la oleosidad, combate la micosis (hongos) y neutraliza olores corporales. Reconstituyente para pieles mixtas a grasas." },
+        cafe: { title: "Jabón de Café", short: "Exfoliante y estimulante de la microcirculación.", full: "Su fricción suave elimina células muertas, suaviza zonas rugosas (codos, rodillas, talones) y tonifica la piel ayudando a atenuar la celulitis." },
+        avena: { title: "Jabón de Avena", short: "Nutritivo, emoliente y aliviador de picazón.", full: "Desinflama la piel irritada, calma el picazón o descamación y absorbe la suciedad sin alterar el manto lipídico." },
+        "rosa mosqueta": { title: "Jabón de Rosa Mosqueta", short: "Regenerador anti-age y despigmentante.", full: "Rico en ácidos grasos y vitaminas A y C. Ayuda a unificar el tono, atenúa cicatrices, estrías y líneas de expresión." },
+        "carbon activado": { title: "Jabón de Carbón Activado", short: "Desintoxicante y purificante profundo de poros.", full: "Absorbe el exceso de grasa, impurezas y toxinas. Excelente aliado contra el acné, puntos negros y pieles grasas." },
+        "jarilla con esponja vegetal": { title: "Jabón de Jarilla c/ Esponja", short: "Doble acción purificante y exfoliante física profunda.", full: "La esponja vegetal incorporada remueve células muertas y activa la circulación, mientras la jarilla aporta propiedades antisépticas." }
+      }
+    };
+
+    let currentGuideCat = 'cremas';
+
+    function switchGuideTab(cat) {
+      currentGuideCat = cat;
+      ['cremas', 'aceites', 'jabones'].forEach(c => {
+        const btn = document.getElementById(`btn-guide-${c}`);
+        btn.className = c === cat 
+          ? "px-4 py-2 text-xs font-bold rounded-lg border bg-brand-800 text-white border-brand-800"
+          : "px-4 py-2 text-xs font-bold rounded-lg border bg-brand-50 text-brand-800 border-brand-200";
+      });
+
+      const tabsHost = document.getElementById('guide-products-tabs');
+      tabsHost.innerHTML = '';
+      const items = Object.keys(beneficiosData[cat]);
+
+      items.forEach((key, idx) => {
+        const item = beneficiosData[cat][key];
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = item.title;
+        btn.className = idx === 0 
+          ? "px-3 py-2 text-xs font-bold rounded-lg border transition-all bg-brand-800 text-white border-brand-800"
+          : "px-3 py-2 text-xs font-bold rounded-lg border transition-all bg-brand-50 text-brand-800 border-brand-200";
+        btn.addEventListener('click', () => {
+          renderGuideDetail(cat, key);
+          tabsHost.querySelectorAll('button').forEach(b => {
+            b.className = b.textContent === item.title
+              ? "px-3 py-2 text-xs font-bold rounded-lg border transition-all bg-brand-800 text-white border-brand-800"
+              : "px-3 py-2 text-xs font-bold rounded-lg border transition-all bg-brand-50 text-brand-800 border-brand-200";
+          });
+        });
+        tabsHost.appendChild(btn);
+      });
+
+      if(items.length > 0) renderGuideDetail(cat, items[0]);
+    }
+
+    function renderGuideDetail(cat, key) {
+      const item = beneficiosData[cat][key];
+      if(!item) return;
+      document.getElementById('guide-detalle-content').innerHTML = `
+        <h3 class="font-bold text-brand-800 text-lg">🌿 ${item.title}</h3>
+        <p class="text-xs text-brand-900/80 leading-relaxed">${item.full}</p>
+      `;
+    }
+
+    // Navegación general
+    function showSection(id){
+      ['inicio','beneficios','pedidos'].forEach(x => {
+        document.getElementById(x).classList.toggle('hidden', x !== id);
+        const navBtn = document.getElementById('nav-' + x);
+        if(navBtn) {
+          navBtn.className = x === id 
+            ? "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-brand-800 text-white shadow-xs"
+            : "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-brand-800 hover:bg-brand-100";
+        }
+      });
+      if(id === 'beneficios') switchGuideTab('cremas');
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    // Catálogo de Productos
+    const products = [
+      {cat:"cremas",name:"Caléndula",size:"20 g",price:5000,keyName:"calendula"},
+      {cat:"cremas",name:"Palán Palán",size:"20 g",price:5000,keyName:"palan"},
+      {cat:"cremas",name:"Manzanilla",size:"20 g",price:5000,keyName:"manzanilla"},
+      {cat:"cremas",name:"Jarilla",size:"20 g",price:5000,keyName:"jarilla"},
+      {cat:"cremas",name:"Jarilla + Mentol",size:"20 g",price:6000,keyName:"mentol"},
+      {cat:"cremas",name:"Rosa Mosqueta",size:"20 g",price:6000,keyName:"rosa"},
+      
+      {cat:"cremas",name:"Caléndula",size:"30 g",price:6000,keyName:"calendula"},
+      {cat:"cremas",name:"Palán Palán",size:"30 g",price:6000,keyName:"palan"},
+      {cat:"cremas",name:"Manzanilla",size:"30 g",price:6000,keyName:"manzanilla"},
+      {cat:"cremas",name:"Jarilla",size:"30 g",price:6000,keyName:"jarilla"},
+      {cat:"cremas",name:"Jarilla + Mentol",size:"30 g",price:9000,keyName:"mentol"},
+      {cat:"cremas",name:"Rosa Mosqueta",size:"30 g",price:9000,keyName:"rosa"},
+      
+      {cat:"cremas",name:"Caléndula",size:"50 g",price:8000,keyName:"calendula"},
+      {cat:"cremas",name:"Palán Palán",size:"50 g",price:8000,keyName:"palan"},
+      {cat:"cremas",name:"Manzanilla",size:"50 g",price:8000,keyName:"manzanilla"},
+      {cat:"cremas",name:"Jarilla",size:"50 g",price:8000,keyName:"jarilla"},
+      {cat:"cremas",name:"Jarilla + Mentol",size:"50 g",price:12000,keyName:"mentol"},
+      {cat:"cremas",name:"Rosa Mosqueta",size:"50 g",price:12000,keyName:"rosa"},
+      
+      {cat:"aceites",name:"Jarilla",size:"15 cc",price:4000,keyName:"jarilla"},
+      {cat:"aceites",name:"Romero",size:"15 cc",price:4000,keyName:"romero"},
+      {cat:"aceites",name:"Orégano",size:"15 cc",price:4000,keyName:"oregano"},
+      {cat:"aceites",name:"Jarilla",size:"30 cc",price:6000,keyName:"jarilla"},
+      {cat:"aceites",name:"Romero",size:"30 cc",price:6000,keyName:"romero"},
+      {cat:"aceites",name:"Orégano",size:"30 cc",price:6000,keyName:"oregano"},
+      {cat:"aceites",name:"Jarilla",size:"45 cc",price:8000,keyName:"jarilla"},
+      {cat:"aceites",name:"Romero",size:"45 cc",price:8000,keyName:"romero"},
+      {cat:"aceites",name:"Orégano",size:"45 cc",price:8000,keyName:"oregano"},
+      
+      {cat:"jabones",name:"Manzanilla",size:"40 g",price:3000,keyName:"manzanilla"},
+      {cat:"jabones",name:"Caléndula",size:"40 g",price:3000,keyName:"calendula"},
+      {cat:"jabones",name:"Jarilla",size:"40 g",price:3000,keyName:"jarilla"},
+      {cat:"jabones",name:"Café",size:"40 g",price:3000,keyName:"cafe"},
+      {cat:"jabones",name:"Avena",size:"40 g",price:3000,keyName:"avena"},
+      {cat:"jabones",name:"Rosa mosqueta",size:"40 g",price:4000,keyName:"rosa mosqueta"},
+      
+      {cat:"jabones",name:"Café",size:"60 g",price:5000,keyName:"cafe"},
+      {cat:"jabones",name:"Jarilla",size:"60 g",price:4000,keyName:"jarilla"},
+      {cat:"jabones",name:"Avena",size:"60 g",price:4000,keyName:"avena"},
+      {cat:"jabones",name:"Manzanilla",size:"60 g",price:4000,keyName:"manzanilla"},
+      {cat:"jabones",name:"Caléndula",size:"60 g",price:4000,keyName:"calendula"},
+      {cat:"jabones",name:"Rosa mosqueta",size:"60 g",price:5000,keyName:"rosa mosqueta"},
+      {cat:"jabones",name:"Carbón activado",size:"60 g",price:5000,keyName:"carbon activado"},
+      
+      {cat:"jabones",name:"Avena",size:"90 g",price:5000,keyName:"avena"},
+      {cat:"jabones",name:"Rosa mosqueta",size:"90 g",price:6000,keyName:"rosa mosqueta"},
+      {cat:"jabones",name:"Café",size:"90 g",price:6000,keyName:"cafe"},
+      {cat:"jabones",name:"Jarilla con esponja vegetal",size:"90 g",price:6000,keyName:"jarilla con esponja vegetal"},
+      {cat:"jabones",name:"Carbón activado",size:"90 g",price:6000,keyName:"carbon activado"}
+    ];
+
+    let activeCategory = "cremas";
+    let activeSize = "Todos";
+    const categoryNames = {cremas:"🌿 Cremas Botánicas", aceites:"🌱 Aceites Naturales", jabones:"🍃 Jabones Artesanales"};
+
+    function sizeOptions(cat){
+      const sizes = [...new Set(products.filter(p=>p.cat===cat).map(p=>p.size))];
+      return ["Todos", ...sizes];
+    }
+
+    function renderProducts(){
+      const host = document.getElementById("products-panel");
+      host.innerHTML = "";
+      document.getElementById("category-title").textContent = categoryNames[activeCategory];
+      
+      document.querySelectorAll("#category-tabs-container .tab").forEach(btn=>{
+        const active = btn.dataset.cat === activeCategory;
+        btn.className = active 
+          ? "tab active bg-brand-800 text-white font-semibold py-2.5 px-3 rounded-xl text-xs sm:text-sm transition-all border border-brand-800 text-center"
+          : "tab bg-brand-50 text-brand-800 font-semibold py-2.5 px-3 rounded-xl text-xs sm:text-sm transition-all border border-brand-200 text-center hover:bg-brand-100";
+      });
+
+      const sizes = sizeOptions(activeCategory);
+      if(!sizes.includes(activeSize)) activeSize = "Todos";
+      
+      const sizeHost = document.getElementById("size-tabs");
+      sizeHost.innerHTML = "";
+      sizes.forEach(size=>{
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = size;
+        btn.className = size === activeSize 
+          ? "px-3 py-1 text-xs font-semibold rounded-full bg-brand-800 text-white border border-brand-800 transition-all"
+          : "px-3 py-1 text-xs font-semibold rounded-full bg-white text-brand-800 border border-brand-200 hover:bg-brand-50 transition-all";
+        btn.addEventListener("click", () => { activeSize = size; renderProducts(); });
+        sizeHost.appendChild(btn);
+      });
+
+      products.filter(p => p.cat === activeCategory && (activeSize === "Todos" || p.size === activeSize)).forEach((p, index) => {
+        const key = `${p.name}|${p.size}`;
+        const stockActual = getStock(depositoActual, p.name, p.size);
+        const sinStock = stockActual <= 0;
+
+        let bData = beneficiosData[p.cat] ? beneficiosData[p.cat][p.keyName] : null;
+
+        const card = document.createElement("article");
+        card.className = "bg-white border border-brand-200 rounded-xl p-4 shadow-xs flex flex-col justify-between space-y-3 relative";
+
+        let infoHtml = "";
+        if(bData) {
+          infoHtml = `
+            <button type="button" class="w-full text-left text-[11px] font-semibold text-brand-500 hover:text-brand-800 flex items-center justify-between py-1 border-t border-brand-100 mt-2" onclick="
+              const box = document.getElementById('infobox-${index}');
+              box.classList.toggle('hidden');
+              this.querySelector('.arrow').textContent = box.classList.contains('hidden') ? '▼' : '▲';
+            ">
+              <span>Más Info & Precauciones</span>
+              <span class="arrow text-[9px]">▼</span>
+            </button>
+            <div id="infobox-${index}" class="hidden text-xs text-brand-900/80 bg-brand-cream/60 p-2.5 rounded-lg mt-1 border border-brand-100 space-y-1 leading-snug">
+              <p><strong>Beneficio:</strong> ${bData.short}</p>
+              <p class="text-rose-900/80"><strong>Propiedad:</strong> ${bData.full}</p>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-start justify-between gap-2">
+              <h3 class="font-bold text-brand-800 text-sm leading-tight">${p.name}</h3>
+              <span class="text-xs font-extrabold bg-brand-50 text-brand-800 px-2 py-0.5 rounded-md border border-brand-200">${p.size}</span>
+            </div>
+            <div class="text-base font-extrabold text-brand-800 mt-1">$${p.price.toLocaleString("es-AR")}</div>
+            
+            <!-- Stock Disponibilidad Dual -->
+            <div class="my-2 text-[11px] font-bold">
+              <span class="px-2.5 py-0.5 rounded-full border ${stockActual > 0 ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200'}">
+                Stock sede: ${stockActual} disp.
+              </span>
+            </div>
+
+            ${infoHtml}
+          </div>
+
+          <div class="pt-2 border-t border-brand-100">
+            <div class="flex items-center gap-2">
+              <input id="q-${index}" type="number" min="1" max="${stockActual}" value="1" ${sinStock ? 'disabled' : ''} class="w-14 text-center text-xs font-bold border border-brand-200 rounded-lg py-2 bg-brand-cream/30 focus:outline-none">
+              <button type="button" ${sinStock ? 'disabled' : ''} id="btn-add-${index}" class="flex-1 py-2 px-3 text-xs font-bold rounded-lg transition-all ${sinStock ? 'bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200' : 'bg-brand-800 text-white hover:bg-brand-500 shadow-xs'}">
+                ${sinStock ? 'Sin Stock' : 'Agregar'}
+              </button>
+            </div>
+          </div>
+        `;
+
+        card.querySelector(`#btn-add-${index}`).addEventListener("click", () => {
+          const qtyInput = card.querySelector(`#q-${index}`);
+          const q = parseInt(qtyInput ? qtyInput.value : "1", 10);
+          
+          if(isNaN(q) || q < 1) {
+            showAlert("Ingresá una cantidad válida de 1 o más.");
+            return;
+          }
+
+          const cartKey = `${depositoActual}_${key}`;
+          const currentInCart = cart.get(cartKey) ? cart.get(cartKey).qty : 0;
+
+          if(currentInCart + q > stockActual) {
+            showAlert(`No podés agregar más de ${stockActual} unidades disponibles en este depósito.`);
+            return;
+          }
+
+          cart.set(cartKey, {
+            name: p.name,
+            size: p.size,
+            price: p.price,
+            qty: currentInCart + q,
+            dep: depositoActual
+          });
+
+          renderCart();
+          
+          const btn = card.querySelector(`#btn-add-${index}`);
+          btn.textContent = "¡Agregado!";
+          setTimeout(() => { btn.textContent = "Agregar"; }, 1400);
+        });
+
+        host.appendChild(card);
+      });
+    }
+
+    document.querySelectorAll("#category-tabs-container .tab").forEach(btn => {
+      btn.addEventListener("click", () => {
+        activeCategory = btn.dataset.cat;
+        activeSize = "Todos";
+        renderProducts();
+      });
+    });
+
+    function renderCart(){
+      const host = document.getElementById("cart");
+      const floatingBadge = document.getElementById("floating-cart-badge");
+      host.innerHTML = "";
+      
+      const currentCartItems = [...cart.values()].filter(item => item.dep === depositoActual);
+
+      let totalItemsCount = currentCartItems.reduce((acc, item) => acc + item.qty, 0);
+      if(totalItemsCount > 0) {
+        floatingBadge.textContent = totalItemsCount;
+        floatingBadge.classList.remove('hidden');
+      } else {
+        floatingBadge.classList.add('hidden');
+      }
+
+      if(currentCartItems.length === 0){
+        host.innerHTML = '<p class="text-xs text-brand-900/60 py-2 italic">Todavía no agregaste productos en este depósito.</p>';
+        document.getElementById("total").textContent = "$0";
+        return;
+      }
+
+      let total = 0;
+      currentCartItems.forEach(item => {
+        const sub = item.price * item.qty;
+        total += sub;
+
+        const line = document.createElement("div");
+        line.className = "py-3 flex items-center justify-between gap-3";
+        line.innerHTML = `
+          <div class="flex-1">
+            <strong class="text-xs text-brand-800">${item.name}</strong>
+            <div class="text-[11px] text-brand-900/60">${item.size} · ${item.qty} unidad(es) × $${item.price.toLocaleString("es-AR")}</div>
+          </div>
+          <div class="text-right flex items-center gap-3">
+            <span class="text-xs font-bold text-brand-800">$${sub.toLocaleString("es-AR")}</span>
+            <button class="text-rose-600 font-bold text-sm p-1 rounded hover:bg-rose-50" type="button" title="Quitar">✕</button>
+          </div>
+        `;
+
+        line.querySelector("button").addEventListener("click", () => {
+          const cartKey = `${depositoActual}_${item.name}|${item.size}`;
+          cart.delete(cartKey);
+          renderCart();
+        });
+
+        host.appendChild(line);
+      });
+
+      document.getElementById("total").textContent = "$" + total.toLocaleString("es-AR");
+    }
+
+    document.getElementById("clear").addEventListener("click", () => {
+      for (let [k, v] of cart.entries()) {
+        if (v.dep === depositoActual) cart.delete(k);
+      }
+      renderCart();
+    });
+
+    function generateWaUrl() {
+      const phone = document.getElementById("destino").value;
+      const name = document.getElementById("nombre").value.trim();
+      const localidad = document.getElementById("localidad").value.trim();
+      const entrega = document.getElementById("entrega").value;
+      const comentario = document.getElementById("comentario").value.trim();
+      
+      const currentCartItems = [...cart.values()].filter(item => item.dep === depositoActual);
+      let total = 0;
+      const lines = [`🌿 *PEDIDO — LIAM COSMÉTICOS VEGANOS*`, `📦 *Depósito:* ${depositoActual === 'rioja' ? 'La Rioja' : 'Buenos Aires (Moreno)'}`, ""];
+      
+      currentCartItems.forEach(item => {
+        const sub = item.price * item.qty;
+        total += sub;
+        lines.push(`• *${item.name}* (${item.size}) × ${item.qty} — $${sub.toLocaleString("es-AR")}`);
+      });
+      
+      lines.push("", `*TOTAL: $${total.toLocaleString("es-AR")}*`, "", `*Nombre:* ${name||"No indicado"}`, `*Localidad:* ${localidad||"No indicada"}`, `*Método de entrega:* ${entrega}`);
+      if(comentario) lines.push(`*Comentario:* ${comentario}`);
+      lines.push("", "Hola, quisiera confirmar disponibilidad y coordinar este pedido. ¡Gracias!");
+      
+      return `https://wa.me/${phone}?text=${encodeURIComponent(lines.join("\n"))}`;
+    }
+
+    document.getElementById("btn-send-wa").addEventListener("click", () => {
+      const currentCartItems = [...cart.values()].filter(item => item.dep === depositoActual);
+      if(currentCartItems.length === 0){
+        showAlert("Agregá al menos un producto al carrito del depósito actual antes de enviar el pedido.");
+        return;
+      }
+      const waUrl = generateWaUrl();
+      const opened = window.open(waUrl, '_blank');
+      if (!opened) {
+        window.location.href = waUrl;
+      }
+    });
+
+    // Inicialización
+    setDeposito('rioja');
+  </script>
+</body>
+</html>
