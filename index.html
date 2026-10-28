@@ -674,28 +674,67 @@ function sizeOptions(cat){
 }
 
 function renderProducts(){
- const host=document.getElementById("products-panel");
- host.innerHTML="";
- document.getElementById("category-title").textContent=categoryNames[activeCategory];
- document.querySelectorAll("#category-tabs-container .tab").forEach(btn=>{
-  const active=btn.dataset.cat===activeCategory;
-  btn.classList.toggle("active",active);
-  btn.setAttribute("aria-pressed",String(active));
- });
- const sizes=sizeOptions(activeCategory);
- const norm = s => String(s).toLowerCase().replace(/\s+/g,"");
-if(!sizes.map(norm).includes(norm(activeSize))) activeSize="Todos";
- const sizeHost=document.getElementById("size-tabs");
- sizeHost.innerHTML="";
- sizes.forEach(size=>{
-  const btn=document.createElement("button");
-  btn.type="button";btn.textContent=size;btn.className=size===activeSize?"active":"";
-  btn.setAttribute("aria-pressed",String(size===activeSize));
-  btn.addEventListener("click",()=>{activeSize=size;renderProducts()});
-  sizeHost.appendChild(btn);
- });
-
-products.filter(p=>p.cat===activeCategory&&(activeSize==="Todos"||norm(p.size)===norm(activeSize))).forEach(p=>{
+  const host=document.getElementById("products-panel");
+  if(!host) return;
+  host.innerHTML="";
+  const norm = s => String(s).toLowerCase().replace(/\s+/g,"");
+  try{
+    document.getElementById("category-title").textContent=categoryNames[activeCategory] || activeCategory;
+  }catch(e){}
+  document.querySelectorAll("#category-tabs-container .tab").forEach(btn=>{
+    const active=btn.dataset.cat===activeCategory;
+    btn.classList.toggle("active",active);
+    btn.setAttribute("aria-pressed",String(active));
+  });
+  const sizes=sizeOptions(activeCategory);
+  if(!sizes.map(norm).includes(norm(activeSize))) activeSize="Todos";
+  const sizeHost=document.getElementById("size-tabs");
+  if(sizeHost){
+    sizeHost.innerHTML="";
+    sizes.forEach(size=>{
+      const btn=document.createElement("button");
+      btn.type="button";btn.textContent=size;btn.className=size===activeSize?"active":"";
+      btn.addEventListener("click",()=>{activeSize=size;renderProducts()});
+      sizeHost.appendChild(btn);
+    });
+  }
+  let list = products.filter(p=>p.cat===activeCategory);
+  if(activeSize!=="Todos"){
+    const filtered = list.filter(p=>norm(p.size)===norm(activeSize));
+    if(filtered.length>0) list = filtered;
+  }
+  console.log("Render",activeCategory,activeSize,list.length);
+  list.forEach((p,i)=>{
+    const key = keyProduct(i);
+    const card=document.createElement("article");
+    card.className="card";
+    card.innerHTML=`
+      <div><h3>${p.name}</h3><div class="small">${p.size}</div><p class="small stock-availability"></p></div>
+      <div class="price">${money(p.price)}</div>
+      <button class="btn">Agregar</button>
+    `;
+    const addBtn = card.querySelector(".btn");
+    const stockLabel=card.querySelector(".stock-availability");
+    if(stockLabel){
+      if(!stockCargado) stockLabel.textContent="Stock: verificando...";
+      else {
+        const stockVal = STOCK[depositoActual] ? STOCK[depositoActual][claveStock(p.name,p.size)] : undefined;
+        const n = stockVal != undefined ? Number(stockVal) : 10;
+        stockLabel.textContent="Disponible en "+(depositoActual==="rioja"?"Chamical":"Moreno")+": "+n;
+        stockLabel.style.fontWeight="650";
+        stockLabel.style.color=n>0?"var(--green)":"#9b2c20";
+      }
+    }
+    addBtn.addEventListener("click",()=>{
+      addBtn.textContent="¡Agregado!";
+      cart.add(key);
+      renderCart();
+      updateDirectWaLink();
+      setTimeout(()=>{addBtn.textContent="Agregar";},1400);
+    });
+    host.appendChild(card);
+  });
+}
   const key=products.indexOf(p);
   const card=document.createElement("article");
   card.className="card";
