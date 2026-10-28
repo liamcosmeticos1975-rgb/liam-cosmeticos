@@ -386,7 +386,7 @@ const cremaBeneficios = {
   jarilla: {
     title: "Jarilla",
     short: "Descontracturante natural, purificante y antioxidante.Elimina hongos de uñas y pies , ayuda a eliminar la hiperhidrosis.",
-    full: "Es descontracturante natural, alivia dolor de ciático, contracturas y tensión muscular. Antioxidante y purificante profundo. Limpia poros, regula grasa y combate hongos."
+    full: "Es descontracturante natural, alivia dolor de ciático, contracturas y tensión muscular.Antioxidante y purificante profundo. Limpia poros, regula grasa y combate hongos."
   },
   mentol: {
     title: "Jarilla + Mentol",
@@ -509,22 +509,22 @@ const products = [
  {cat:"cremas",name:"Jarilla + Mentol",size:"50 gr",price:12000,keyName:"mentol"},
  {cat:"cremas",name:"Rosa Mosqueta",size:"50 gr",price:12000,keyName:"rosa"},
 
- {cat:"cremas",name:"Bloqueador solar",size:"30 gr",price:10000,keyName:"bloqueador"},
+ {cat:"cremas",name:"Bloqueador solar",size:"30 gr",price:7000,keyName:"bloqueador"},
  {cat:"cremas",name:"Crema antiage",size:"30 gr",price:7000,keyName:"antiage"},
  
  // --- ACEITES ---
  {cat:"aceites",name:"Jarilla",size:"15 cc",price:4000,keyName:"jarilla"},
  {cat:"aceites",name:"Romero",size:"15 cc",price:4000,keyName:"romero"},
- {cat:"aceites",name:"Orégano",size:"15cc",price:4000,keyName:"ORG-15"},
+ {cat:"aceites",name:"Orégano",size:"15 cc",price:4000,keyName:"oregano"},
  {cat:"aceites",name:"Jarilla",size:"20 cc",price:5000,keyName:"jarilla"},
- {cat:"aceites",name:"Romero",size:"20 cc",price:5000,keyName:"ORG-20"},
- {cat:"aceites",name:"Orégano",size:"20cc",price:5000,keyName:"ORG-20"},
+ {cat:"aceites",name:"Romero",size:"20 cc",price:5000,keyName:"romero"},
+ {cat:"aceites",name:"Orégano",size:"20 cc",price:5000,keyName:"oregano"},
  {cat:"aceites",name:"Jarilla",size:"30 cc",price:6000,keyName:"jarilla"},
- {cat:"aceites",name:"Orégano",size:"30cc",price:6000,keyName:"ORG-30"},
- {cat:"aceites",name:"Orégano",size:"30 cc",price:6000,keyName:"ORG-30"},
+ {cat:"aceites",name:"Romero",size:"30 cc",price:6000,keyName:"romero"},
+ {cat:"aceites",name:"Orégano",size:"30 cc",price:6000,keyName:"oregano"},
  {cat:"aceites",name:"Jarilla",size:"45 cc",price:8000,keyName:"jarilla"},
  {cat:"aceites",name:"Romero",size:"45 cc",price:8000,keyName:"romero"},
-{cat:"aceites",name:"Orégano",size:"45cc",price:8000,keyName:"ORG-45"},
+ {cat:"aceites",name:"Orégano",size:"45 cc",price:8000,keyName:"oregano"},
  
  // --- JABONES ---
  {cat:"jabones",name:"Manzanilla",size:"40 gr",price:3000,keyName:"manzanilla"},
@@ -551,14 +551,14 @@ const products = [
  {cat:"jabones",name:"Carbón activado",size:"90 gr",price:6000,keyName:"carbon activado"},
 
  // --- HIDROLATOS ---
- {cat:"hidrolatos",name:"Hidrolato de orégano",size:"20cc",price:5000,keyName:"HID-ORE-20"},
- {cat:"hidrolatos",name:"Hidrolato de diente de león",size:"30cc",price:4500,keyName:"HID-DLE-30"},
- {cat:"hidrolatos",name:"Hidrolato de atamisqui",size:"30cc",price:4500,keyName:"HID-ATA-30"},
- {cat:"hidrolatos",name:"Hidrolato de jarilla",size:"30cc",price:4500,keyName:"HID-JAR-30"},
+ {cat:"hidrolatos",name:"Orégano",size:"20 cc",price:4500,keyName:"hidrolato_oregano"},
+ {cat:"hidrolatos",name:"Hidrolato de diente de león",size:"30 cc",price:4500,keyName:"diente_leon"},
+ {cat:"hidrolatos",name:"Hidrolato de atamisqui",size:"30 cc",price:4500,keyName:"atamisqui"},
+ {cat:"hidrolatos",name:"Hidrolato de jarilla",size:"30 cc",price:4500,keyName:"hidrolato_jarilla"},
 
  // --- TÓNICOS ---
- {cat:"tonicos",name:"Bruma de rosas y manzanilla",size:"60 cc",price:8000,keyName:"Bruma rosas  de rosas y manzanilla"},
- {cat:"tonicos",name:"Agua desmaquillante de rosas y manzanilla",size:"60 cc",price:8000,keyName:"Agua desmaquillante  de rosas y manzanilla"},
+ {cat:"tonicos",name:"Bruma de rosas",size:"100 cc",price:5500,keyName:"bruma_rosas"},
+ {cat:"tonicos",name:"Agua desmaquillante",size:"100 cc",price:5000,keyName:"agua_desmaquillante"},
 
  // --- CAPILAR ---
  {cat:"capilar",name:"Sérum capilar",size:"30 cc",price:6500,keyName:"serum_capilar"}
@@ -599,11 +599,8 @@ function normalizarProducto(v){
   return n;
 }
 function claveStock(nombre,presentacion){
-  let k = productos.find(p => p.name===nombre && p.size===presentacion)?.keyName || nombre;
-  k = String(k).trim();
-  if(k.startsWith("ORG-") || k.startsWith("HID-")) return k.toUpperCase();
-  return normalizarClave(k) + "_" + normalizarPresentacion(presentacion);
- }
+  return normalizarProducto(nombre)+"|"+normalizarPresentacion(presentacion);
+}
 function parseCSVLine(line, delimiter){
   const a=[]; let v="", q=false;
   for(let i=0;i<line.length;i++){
@@ -664,77 +661,32 @@ async function cargarStockDesdeSheet(){
 }
 
 function sizeOptions(cat){
- const raw = products.filter(p=>p.cat===cat).map(p=>p.size);
- const map = new Map();
- raw.forEach(s=>{
-   let k = String(s).toLowerCase().replace(/\s+/g,"");
-   if(!map.has(k)) map.set(k, s);
- });
- return ["Todos", ...map.values()];
+ const sizes = [...new Set(products.filter(p=>p.cat===cat).map(p=>p.size))];
+ return ["Todos", ...sizes];
 }
 
 function renderProducts(){
-  const host=document.getElementById("products-panel");
-  if(!host) return;
-  host.innerHTML="";
-  const norm = s => String(s).toLowerCase().replace(/\s+/g,"");
-  try{
-    document.getElementById("category-title").textContent=categoryNames[activeCategory] || activeCategory;
-  }catch(e){}
-  document.querySelectorAll("#category-tabs-container .tab").forEach(btn=>{
-    const active=btn.dataset.cat===activeCategory;
-    btn.classList.toggle("active",active);
-    btn.setAttribute("aria-pressed",String(active));
-  });
-  const sizes=sizeOptions(activeCategory);
-  if(!sizes.map(norm).includes(norm(activeSize))) activeSize="Todos";
-  const sizeHost=document.getElementById("size-tabs");
-  if(sizeHost){
-    sizeHost.innerHTML="";
-    sizes.forEach(size=>{
-      const btn=document.createElement("button");
-      btn.type="button";btn.textContent=size;btn.className=size===activeSize?"active":"";
-      btn.addEventListener("click",()=>{activeSize=size;renderProducts()});
-      sizeHost.appendChild(btn);
-    });
-  }
-  let list = products.filter(p=>p.cat===activeCategory);
-  if(activeSize!=="Todos"){
-    const filtered = list.filter(p=>norm(p.size)===norm(activeSize));
-    if(filtered.length>0) list = filtered;
-  }
-  console.log("Render",activeCategory,activeSize,list.length);
-  list.forEach((p,i)=>{
-    const key = keyProduct(i);
-    const card=document.createElement("article");
-    card.className="card";
-    card.innerHTML=`
-      <div><h3>${p.name}</h3><div class="small">${p.size}</div><p class="small stock-availability"></p></div>
-      <div class="price">${money(p.price)}</div>
-      <button class="btn">Agregar</button>
-    `;
-    const addBtn = card.querySelector(".btn");
-    const stockLabel=card.querySelector(".stock-availability");
-    if(stockLabel){
-      if(!stockCargado) stockLabel.textContent="Stock: verificando...";
-      else {
-        const stockVal = STOCK[depositoActual] ? STOCK[depositoActual][claveStock(p.name,p.size)] : undefined;
-        const n = stockVal != undefined ? Number(stockVal) : 10;
-        stockLabel.textContent="Disponible en "+(depositoActual==="rioja"?"Chamical":"Moreno")+": "+n;
-        stockLabel.style.fontWeight="650";
-        stockLabel.style.color=n>0?"var(--green)":"#9b2c20";
-      }
-    }
-    addBtn.addEventListener("click",()=>{
-      addBtn.textContent="¡Agregado!";
-      cart.add(key);
-      renderCart();
-      updateDirectWaLink();
-      setTimeout(()=>{addBtn.textContent="Agregar";},1400);
-    });
-    host.appendChild(card);
-  });
-}
+ const host=document.getElementById("products-panel");
+ host.innerHTML="";
+ document.getElementById("category-title").textContent=categoryNames[activeCategory];
+ document.querySelectorAll("#category-tabs-container .tab").forEach(btn=>{
+  const active=btn.dataset.cat===activeCategory;
+  btn.classList.toggle("active",active);
+  btn.setAttribute("aria-pressed",String(active));
+ });
+ const sizes=sizeOptions(activeCategory);
+ if(!sizes.includes(activeSize)) activeSize="Todos";
+ const sizeHost=document.getElementById("size-tabs");
+ sizeHost.innerHTML="";
+ sizes.forEach(size=>{
+  const btn=document.createElement("button");
+  btn.type="button";btn.textContent=size;btn.className=size===activeSize?"active":"";
+  btn.setAttribute("aria-pressed",String(size===activeSize));
+  btn.addEventListener("click",()=>{activeSize=size;renderProducts()});
+  sizeHost.appendChild(btn);
+ });
+
+ products.filter(p=>p.cat===activeCategory&&(activeSize==="Todos"||p.size===activeSize)).forEach(p=>{
   const key=products.indexOf(p);
   const card=document.createElement("article");
   card.className="card";
