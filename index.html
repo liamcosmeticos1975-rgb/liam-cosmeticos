@@ -599,8 +599,11 @@ function normalizarProducto(v){
   return n;
 }
 function claveStock(nombre,presentacion){
-  return normalizarProducto(nombre)+"|"+normalizarPresentacion(presentacion);
-}
+  let k = productos.find(p => p.name===nombre && p.size===presentacion)?.keyName || nombre;
+  k = String(k).trim();
+  if(k.startsWith("ORG-") || k.startsWith("HID-")) return k.toUpperCase();
+  return normalizarClave(k) + "_" + normalizarPresentacion(presentacion);
+ }
 function parseCSVLine(line, delimiter){
   const a=[]; let v="", q=false;
   for(let i=0;i<line.length;i++){
