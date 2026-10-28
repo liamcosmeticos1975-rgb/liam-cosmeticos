@@ -664,8 +664,13 @@ async function cargarStockDesdeSheet(){
 }
 
 function sizeOptions(cat){
- const sizes = [...new Set(products.filter(p=>p.cat===cat).map(p=>p.size))];
- return ["Todos", ...sizes];
+ const raw = products.filter(p=>p.cat===cat).map(p=>p.size);
+ const map = new Map();
+ raw.forEach(s=>{
+   let k = String(s).toLowerCase().replace(/\s+/g,"");
+   if(!map.has(k)) map.set(k, s);
+ });
+ return ["Todos", ...map.values()];
 }
 
 function renderProducts(){
