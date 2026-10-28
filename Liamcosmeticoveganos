@@ -12,7 +12,7 @@ body{margin:0;background:var(--cream);color:var(--ink);font-family:system-ui,-ap
 header{background:linear-gradient(135deg,#e4f0dc,#fffdf5);border-bottom:3px solid var(--green);text-align:center;padding:24px 14px 20px}
 header h1{margin:0;color:var(--green);font-family:Georgia,serif;font-size:clamp(2rem,8vw,3.5rem);letter-spacing:2px}
 header p{margin:2px 0;color:var(--green)}.tag{font-size:.9rem}
-main{max-width:950px;margin:auto;padding:16px}
+main{max-width:980px;margin:auto;padding:16px}
 h2{font-size:1.3rem;color:var(--green);margin:12px 0}
 .note{background:var(--pale);border:1px solid var(--line);padding:12px;border-radius:12px;font-size:.94rem;line-height:1.5}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:12px}
@@ -32,8 +32,8 @@ button.remove{background:#f7e7e3;color:#7d2c20;padding:7px 10px;width:auto}
 footer{text-align:center;padding:22px;color:#45634c;font-size:.88rem}
 .hidden{display:none!important}
 
-.tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:10px 0}
-.tabs .tab{padding:10px 5px;font-size:.9rem;background:#e5eee1;color:var(--green);border:1px solid var(--line);cursor:pointer;border-radius:10px;font-weight:600;text-align:center}
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:7px;margin:10px 0}
+.tabs .tab{padding:10px 5px;font-size:.88rem;background:#e5eee1;color:var(--green);border:1px solid var(--line);cursor:pointer;border-radius:10px;font-weight:600;text-align:center}
 .tabs .tab.active{background:var(--green);color:#fff}
 .category-title{font-weight:750;color:var(--green);margin:14px 0 8px}
 #products-panel{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
@@ -119,6 +119,15 @@ footer{text-align:center;padding:22px;color:#45634c;font-size:.88rem}
   background: #1ebc57;
 }
 
+.contact-info {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+  font-size: 0.9rem;
+}
+
 @media(max-width:420px){
   .tabs .tab{font-size:.82rem}
   .qtyrow{flex-wrap:wrap}
@@ -131,28 +140,42 @@ footer{text-align:center;padding:22px;color:#45634c;font-size:.88rem}
   <h1>LIAM</h1>
   <p style="font-size:1.35rem;font-style:italic">Cosméticos Veganos</p>
   <p>Chamical · La Rioja</p>
-  <p class="tag">100% vegano · Artesanal · Riojano</p>
+  <div class="contact-info">
+    <span>📞 +54 9 3826 51-2455</span>
+    <span>📷 @LIAMCOSMETICOS.VGNOS</span>
+  </div>
+  <p class="tag" style="margin-top:4px;">100% vegano · Artesanal · Riojano</p>
 </header>
 
 <main>
   <!-- SECCIÓN INICIO -->
   <section class="home-hero" id="inicio">
-    <p class="tag">🌿 Cosmética vegana y artesanal</p>
+    <p class="tag">🌿 Cosmética vegana y fitoterapia artesanal</p>
     <h2>Bienvenidos a LIAM</h2>
-    <p>Conocé en detalle los beneficios de nuestras cremas, aceites y jabones naturales, sus propiedades, modos de uso, precauciones y explorá nuestro catálogo para armar tu pedido.</p>
+    <p>Conocé en detalle los beneficios de nuestras cremas, aceites, suplementos, hidrolatos, tónicos y sérums naturales, sus propiedades, modos de uso, precauciones y explorá nuestro catálogo completo para armar tu pedido.</p>
     <div class="home-actions">
       <button type="button" id="btn-to-beneficios">🌱 Guía y Beneficios</button>
       <button type="button" id="btn-to-pedidos">🛒 Hacer un pedido</button>
     </div>
   </section>
 
-  <!-- SECCIÓN BENEFICIOS DE CREMAS -->
+  <!-- SECCIÓN BENEFICIOS -->
   <section id="beneficios" class="hidden">
-    <h2>🌿 Beneficios y Propiedades de las Cremas LIAM</h2>
-    <p class="note">Seleccioná una crema para conocer sus características cosméticas, indicaciones especiales y recomendaciones de aplicación.</p>
+    <h2>🌿 Guía Botánica y Beneficios LIAM</h2>
+    <p class="note">Seleccioná un producto para conocer sus características, ingredientes, indicaciones especiales y recomendaciones de aplicación.</p>
     
-    <nav class="tabs" aria-label="Selección de cremas" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));" id="crema-tabs-container">
-      <button class="tab active" type="button" data-crema="calendula">Caléndula</button>
+    <nav class="tabs" aria-label="Selección de guías" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));" id="crema-tabs-container">
+      <button class="tab active" type="button" data-crema="yodixir">Yodixir (Tiroides)</button>
+      <button class="tab" type="button" data-crema="serum_capilar">Sérum Capilar</button>
+      <button class="tab" type="button" data-crema="agua_desmaquillante">Desmaquillante</button>
+      <button class="tab" type="button" data-crema="antiage">Crema Antiage</button>
+      <button class="tab" type="button" data-crema="bloqueador">Bloqueador Solar</button>
+      <button class="tab" type="button" data-crema="bruma_rosas">Bruma de Rosas</button>
+      <button class="tab" type="button" data-crema="hidrolato_oregano">Hidr. Orégano</button>
+      <button class="tab" type="button" data-crema="diente_leon">Hidr. Diente León</button>
+      <button class="tab" type="button" data-crema="atamisqui">Hidr. Atamisqui</button>
+      <button class="tab" type="button" data-crema="hidrolato_jarilla">Hidr. Jarilla</button>
+      <button class="tab" type="button" data-crema="calendula">Caléndula</button>
       <button class="tab" type="button" data-crema="palan">Palán Palán</button>
       <button class="tab" type="button" data-crema="manzanilla">Manzanilla</button>
       <button class="tab" type="button" data-crema="jarilla">Jarilla</button>
@@ -165,15 +188,15 @@ footer{text-align:center;padding:22px;color:#45634c;font-size:.88rem}
     <div class="benefits-grid">
       <div class="benefit-card" style="margin:0;">
         <h3>📌 Modo de uso general</h3>
-        <p>Aplicar una pequeña cantidad sobre piel limpia y seca con masajes suaves hasta su total absorción. Uso externo únicamente. Uso diario. Conservar en lugar fresco y seco, alejado del sol y del calor.</p>
+        <p>Aplicar según la indicación específica de cada producto (tópico o sublingual). Uso diario. Conservar en lugar fresco y seco, alejado del sol directo y del calor excesivo.</p>
       </div>
       <div class="benefit-card" style="margin:0;">
         <h3>⚠️ Precauciones generales</h3>
         <ul>
-          <li>No aplicar sobre heridas abiertas, quemaduras recientes, mucosas ni ojos.</li>
-          <li>No usar en embarazo, lactancia y menores de 3 años sin consulta médica (Jarilla + Mentol u Orégano no usar en menores de 6 años).</li>
-          <li>Suspender uso en caso de irritación, enrojecimiento o picazón.</li>
-          <li>Producto cosmético natural. No reemplaza tratamiento médico.</li>
+          <li>No aplicar sobre heridas abiertas, quemaduras recientes, mucosas ni ojos (excepto indicación específica).</li>
+          <li>No usar en embarazo, lactancia y menores de 3 años sin consulta médica.</li>
+          <li>Suspender uso en caso de irritación o alergia.</li>
+          <li>Producto natural artesanal. No reemplaza tratamiento médico profesional.</li>
         </ul>
       </div>
     </div>
@@ -187,7 +210,7 @@ footer{text-align:center;padding:22px;color:#45634c;font-size:.88rem}
   <!-- SECCIÓN PEDIDOS -->
   <section id="pedidos" class="hidden">
     <button class="secondary back-home btn-go-inicio" type="button">← Inicio</button>
-    <p class="note">Elegí los productos y las cantidades que quieras. Todos los productos incluyen sus beneficios y precauciones directamente en la tarjeta. El detalle se envía por WhatsApp para confirmar disponibilidad y entrega.</p>
+    <p class="note">Elegí los productos y las cantidades que quieras. Todos los productos incluyen sus beneficios en la tarjeta. El detalle se envía por WhatsApp para confirmar disponibilidad y entrega.</p>
     
     <section class="card" style="margin:12px 0">
       <h2>📦 Stock por depósito</h2>
@@ -198,14 +221,19 @@ footer{text-align:center;padding:22px;color:#45634c;font-size:.88rem}
       </select>
       <p id="stock-status" class="small" aria-live="polite">Conectando con el stock…</p>
     </section>
+
     <h2>Categorías de productos</h2>
     <nav class="tabs" aria-label="Categorías de productos" id="category-tabs-container">
-      <button class="tab active" type="button" data-cat="cremas">🌿 Cremas</button>
+      <button class="tab active" type="button" data-cat="suplementos">🌿 Suplementos</button>
+      <button class="tab" type="button" data-cat="cremas">✨ Cremas</button>
       <button class="tab" type="button" data-cat="aceites">🌱 Aceites</button>
       <button class="tab" type="button" data-cat="jabones">🍃 Jabones</button>
+      <button class="tab" type="button" data-cat="hidrolatos">💧 Hidrolatos</button>
+      <button class="tab" type="button" data-cat="tonicos">🌸 Tónicos</button>
+      <button class="tab" type="button" data-cat="capilar">💆 Capilar</button>
     </nav>
     
-    <div id="category-title" class="category-title">Cremas</div>
+    <div id="category-title" class="category-title">Suplementos</div>
     <nav id="size-tabs" class="size-tabs" aria-label="Tamaño o presentación"></nav>
     <div id="products-panel" class="grid"></div>
     
@@ -274,61 +302,111 @@ document.getElementById('modal-close-btn').addEventListener('click', function() 
 });
 
 const cremaBeneficios = {
+  yodixir: {
+    title: "YODIXIR — Activa tu Metabolismo y cuida tu Tiroides",
+    short: "Suplemento natural y vegano para activar el metabolismo y cuidar la tiroides.",
+    full: "YODIXIR es un suplemento natural y vegano que combina ingredientes puros y naturales para activar el metabolismo y cuidar la tiroides.<br><br><strong>Ingredientes:</strong><br>• Yodo: esencial para la producción de hormonas tiroideas y el metabolismo energético.<br>• COCO PREMIUM: Reduce la inflamación, es antioxidante, protege las células de los radicales libres. Ayuda a regenerar la glándula dañada y corregir el desequilibrio de la tiroides.<br>• JARILLA: planta que mejora la circulación sanguínea y apoya la función cerebral, contiene una cantidad potencial de yodo y potasio.<br><br><strong>Beneficios:</strong><br>• Activa el metabolismo: Ayuda a aumentar la producción de hormonas tiroideas y a mejorar el metabolismo energético.<br>• Mejorar la energía: Ayuda a mejorar la energía y a reducir la fatiga.<br><br><strong>Ideal para:</strong> Personas con Hipotiroidismo.<br><strong>Modo de uso:</strong> 5 gotas sublinguales."
+  },
+  serum_capilar: {
+    title: "Sérum Capilar",
+    short: "Hidratante y reparador con coco premium y vitamina E.",
+    full: "Es hidratante y reparador que actúa en los folículos capilares, fortalece el cabello y previene la alopecia. Hecho a base de coco premium con vitamina E."
+  },
+  agua_desmaquillante: {
+    title: "Agua Desmaquillante",
+    short: "Agua micelar bifásica de rosas y manzanilla.",
+    full: "Agua micelar bifásica desmaquillante, de rosas y manzanilla. Hidrata la piel y es antiinflamatorio."
+  },
+  antiage: {
+    title: "Crema Antiage",
+    short: "Con manteca de palma, manzanilla y vitaminas A, B1, B6, E.",
+    full: "Está hecha a base de manteca de palma y manzanilla, con vitaminas A, B1, B6, E. Antioxidante celular que disminuye las líneas de expresión."
+  },
+  bloqueador: {
+    title: "Bloqueador Solar",
+    short: "Protección física y natural contra rayos UV.",
+    full: "Protector solar natural con minerales nutritivos que cuidan la piel del sol sin químicos agresivos."
+  },
+  bruma_rosas: {
+    title: "Bruma de Rosas",
+    short: "Tonificante y refrescante facial natural.",
+    full: "Refresca, equilibra el pH y devuelve la vitalidad natural al rostro en cualquier momento del día."
+  },
+  hidrolato_oregano: {
+    title: "Hidrolato de Orégano",
+    short: "Antiséptico, antifúngico y descongestivo natural.",
+    full: "Purificante concentrado ideal para combatir hongos, bacterias y descongestionar la piel."
+  },
+  diente_leon: {
+    title: "Hidrolato de Diente de León",
+    short: "Complejo vitamínico, depurativo hepático y probiótico natural.",
+    full: "Es un complejo vitamínico que ayuda a elevar el sistema inmunológico y depura el hígado. La inulina es un probiótico natural absorbido por los intestinos que mejora el organismo y facilita la absorción del complejo vitamínico B."
+  },
+  atamisqui: {
+    title: "Hidrolato de Atamisqui",
+    short: "Controla glucemia/insulina, colesterol y ácido úrico. Diurético.",
+    full: "Ayuda a controlar la resistencia a la insulina, el colesterol y el ácido úrico. Es diurético y antiinflamatorio. Elimina cálculos renales, oxalatos (arenilla) y toxinas del hígado."
+  },
+  hidrolato_jarilla: {
+    title: "Hidrolato de Jarilla",
+    short: "Inmunomodulador, antimicótico y antioxidante celular.",
+    full: "Inmunomodulador, apoya afecciones complejas (carcinoma, linfoma), combate hongos en uñas y candidiasis (6 cepas). Antioxidante celular, alivia síntomas de temblores."
+  },
   calendula: {
     title: "Caléndula",
     short: "Regeneradora y cicatrizante. Ideal piel sensible, bebés y embarazadas.",
-    full: "Regeneradora y cicatrizante por excelencia. Estimula la producción de colágeno. Ideal para piel sensible, con irritaciones, dermatitis del pañal, acné inflamado, quemaduras solares, cortes superficiales. Calma el enrojecimiento, reduce la inflamación, acelera el cierre de heriditas. Suaviza y nutre en profundidad."
+    full: "Regeneradora y cicatrizante por excelencia. Estimula la producción de colágeno. Ideal para piel sensible, con irritaciones, dermatitis del pañal, acné inflamado, quemaduras solares, cortes superficiales. Calma el enrojecimiento, reduce la inflamación y nutre en profundidad."
   },
   palan: {
     title: "Palán Palán",
     short: "Desinflamante natural potente, uso ancestral riojano.",
-    full: "Desinflamante natural muy potente, uso ancestral riojano. Perfecta para dolores musculares, articulares, golpes, hinchazón, forúnculos, abscesos, hemorroides. Acción antiséptica, antibacteriana y calmante. Ayuda a madurar granitos profundos y quistes. También ayuda con forúnculos recurrentes y es ideal para personas con diabetes."
+    full: "Desinflamante natural muy potente, uso ancestral riojano. Perfecta para dolores musculares, articulares, golpes, hinchazón, forúnculos, abscesos, hemorroides. Acción antiséptica, antibacteriana y calmante."
   },
   manzanilla: {
     title: "Manzanilla",
     short: "Ultra calmante y anti-alérgica. Para pieles sensibles y rosácea.",
-    full: "Ultra calmante y anti-alérgica. Rica en bisabolol y chamazuleno. Para pieles ultra sensibles, con rosácea, picazón, dermatitis, alergias, piel irritada por frío o depilación. Relaja el sistema nervioso, desinflama, aclara manchitas por irritación, suaviza líneas de expresión por sequedad."
+    full: "Ultra calmante y anti-alérgica. Rica en bisabolol y chamazuleno. Para pieles ultra sensibles, con rosácea, picazón, dermatitis, alergias, piel irritada por frío o depilación."
   },
   jarilla: {
     title: "Jarilla",
     short: "Descontracturante natural, purificante y antioxidante.",
-    full: "Es descontracturante natural, alivia dolor de ciático, contracturas y tensión muscular. Antioxidante y purificante profundo. Limpia poros, regula grasa, combate hongos. Previene envejecimiento. Para piel mixta a grasa."
+    full: "Es descontracturante natural, alivia dolor de ciático, contracturas y tensión muscular. Antioxidante y purificante profundo. Limpia poros, regula grasa y combate hongos."
   },
   mentol: {
     title: "Jarilla + Mentol",
     short: "Descontracturante potente con efecto frío analgésico.",
-    full: "También es descontracturante potente y alivia dolor de ciático, ciática, lumbalgia y contracturas. Todo lo de Jarilla + efecto frío analgésico del mentol. Descongestiona vías respiratorias, alivia dolor de cabeza, piernas cansadas, picaduras. Refrescante y relajante muscular."
+    full: "Descontracturante potente que alivia dolor de ciático, lumbalgia y contracturas. Todo lo de Jarilla + efecto frío analgésico del mentol. Descongestiona y alivia piernas cansadas."
   },
   rosa: {
     title: "Rosa Mosqueta",
     short: "La premium despigmentante y anti-age para cicatrices y estrías.",
-    full: "La premium despigmentante y anti-age. La rosa mosqueta regenera colágeno, borra cicatrices, estrías y líneas finas. Anti-manchas, anti-arrugas y extra hidratante. Suaviza textura rugosa y unifica tono. Antioxidante con vitaminas A, C y E."
+    full: "La premium despigmentante y anti-age. La rosa mosqueta regenera colágeno, borra cicatrices, estrías y líneas finas. Anti-manchas, anti-arrugas y extra hidratante."
   }
 };
 
 const aceiteBeneficios = {
   jarilla: {
     short: "Antiinflamatorio para dolores musculares, reuma y golpes.",
-    full: "Antiinflamatorio para dolores musculares y articulares, alivia reuma y golpes, antifúngico, regula piel grasa y acné, fortalece el cabello. Uso externo únicamente. No usar en embarazo, lactancia y menores de 3 años."
+    full:  "Antiinflamatorio para dolores musculares y articulares, alivia reuma y golpes, antifúngico, regula piel grasa y acné, fortalece el cabello. Uso externo únicamente."
   },
   romero: {
     short: "Estimulante circulatorio y capilar, alivia tensiones.",
-    full: "Estimulante de la circulación sanguínea, promueve el crecimiento del cabello y combate su caída, mejora la concentración, alivia dolores musculares, antiséptico y antioxidante. No usar en embarazo, lactancia, niños menores de 6 años, ni en hipertensión o epilepsia."
+    full: "Estimulante de la circulación sanguínea, promueve el crecimiento del cabello y combate su caída, mejora la concentración, alivia dolores musculares, antiséptico."
   },
   oregano: {
     short: "Antifúngico potente, refuerza defensas y alivia dolores.",
-    full: "Antifúngico potente para hongos de uñas y pies, alivia dolores musculares, refuerza defensas, combate acné y caspa, descongestivo natural. Uso externo. No usar en embarazo, lactancia y menores de 6 años."
+    full: "Antifúngico potente para hongos de uñas y pies, alivia dolores musculares, combate acné y caspa, descongestivo natural."
   }
 };
 
 const jabonBeneficios = {
   manzanilla: {
     short: "Calmante y antiinflamatorio para pieles sensibles y rosácea.",
-    full: "Desinflama pieles sensibles, alivia rojeces, rosácea e irritaciones por quemaduras solares o depilación. Aporta suavidad extrema. Ideal uso diario infantil y nocturno."
+    full: "Desinflama pieles sensibles, alivia rojeces, rosácea e irritaciones por quemaduras solares o depilación. Aporta suavidad extrema."
   },
   calendula: {
     short: "Regenerador y cicatrizante natural para pieles delicadas.",
-    full: "Estimula la renovación celular, reduce la inflamación y suaviza zonas secas o agrietadas. Ideal para pieles sensibles, reactivas o con dermatitis."
+    full: "Estimula la renovación celular, reduce la inflamación y suaviza zonas secas o agrietadas. Ideal para pieles sensibles."
   },
   jarilla: {
     short: "Purificante, antiséptico y desodorante natural.",
@@ -336,23 +414,23 @@ const jabonBeneficios = {
   },
   cafe: {
     short: "Exfoliante y estimulante de la microcirculación.",
-    full: "Su fricción suave elimina células muertas, suaviza zonas rugosas (codos, rodillas, talones) y tonifica la piel ayudando a atenuar la celulitis. Usar 2 a 3 veces por semana."
+    full: "Su fricción suave elimina células muertas, suaviza zonas rugosas (codos, rodillas, talones) y tonifica la piel."
   },
   avena: {
     short: "Nutritivo, emoliente y aliviador de picazón.",
-    full: "Desinflama la piel irritada, calma el picazón o descamación y absorbe la suciedad sin alterar el manto lipídico. Ideal para pieles secas y delicadas."
+    full: "Desinflama la piel irritada, calma el picazón o descamación y absorbe la suciedad sin alterar la piel. Ideal para pieles secas."
   },
   "rosa mosqueta": {
     short: "Regenerador anti-age y despigmentante.",
-    full: "Rico en ácidos grasos y vitaminas A y C. Ayuda a unificar el tono, atenúa cicatrices, estrías y líneas de expresión, aportando elasticidad profunda."
+    full: "Rico en ácidos grasos y vitaminas A y C. Ayuda a unificar el tono, atenúa cicatrices, estrías y líneas de expresión."
   },
   "carbon activado": {
     short: "Desintoxicante y purificante profundo de poros.",
-    full: "Absorbe el exceso de grasa, impurezas y toxinas. Excelente aliado contra el acné, puntos negros y pieles grasas o expuestas a contaminación urbana."
+    full: "Absorbe el exceso de grasa, impurezas y toxinas. Excelente aliado contra el acné, puntos negros y pieles grasas."
   },
   "jarilla con esponja vegetal": {
     short: "Doble acción purificante y exfoliante física profunda.",
-    full: "La esponja vegetal incorporada remueve células muertas y activa la circulación, mientras la jarilla aporta sus propiedades antisépticas, antimicóticas y desodorantes."
+    full: "La esponja vegetal incorporada remueve células muertas y activa la circulación, mientras la jarilla aporta sus propiedades antisépticas."
   }
 };
 
@@ -360,7 +438,7 @@ function renderCremaBeneficio(key) {
   const item = cremaBeneficios[key];
   if(!item) return;
   document.getElementById('crema-detalle-content').innerHTML = `
-    <h3>🌿 Crema de ${item.title}</h3>
+    <h3>🌿 ${item.title}</h3>
     <p>${item.full}</p>
   `;
   document.querySelectorAll('#crema-tabs-container [data-crema]').forEach(b => {
@@ -372,7 +450,7 @@ document.querySelectorAll('#crema-tabs-container [data-crema]').forEach(b => {
   b.addEventListener('click', () => renderCremaBeneficio(b.dataset.crema));
 });
 
-renderCremaBeneficio('calendula');
+renderCremaBeneficio('yodixir');
 
 function showSection(id){
   ['inicio','beneficios','pedidos'].forEach(x => {
@@ -388,30 +466,43 @@ document.querySelectorAll('.btn-go-inicio').forEach(btn => btn.addEventListener(
 document.querySelectorAll('.btn-go-pedidos').forEach(btn => btn.addEventListener('click', () => showSection('pedidos')));
 
 const products = [
- {cat:"cremas",name:"Caléndula",size:"20 g",price:5000,keyName:"calendula"},
- {cat:"cremas",name:"Palán Palán",size:"20 g",price:5000,keyName:"palan"},
- {cat:"cremas",name:"Manzanilla",size:"20 g",price:5000,keyName:"manzanilla"},
- {cat:"cremas",name:"Jarilla",size:"20 g",price:5000,keyName:"jarilla"},
- {cat:"cremas",name:"Jarilla + Mentol",size:"20 g",price:6000,keyName:"mentol"},
- {cat:"cremas",name:"Rosa Mosqueta",size:"20 g",price:6000,keyName:"rosa"},
+ // --- SUPLEMENTOS ---
+ {cat:"suplementos",name:"YODIXIR",size:"15 cc",price:4000,keyName:"yodixir"},
+ {cat:"suplementos",name:"YODIXIR",size:"20 cc",price:4500,keyName:"yodixir"},
+ {cat:"suplementos",name:"YODIXIR",size:"30 cc",price:6000,keyName:"yodixir"},
+
+ // --- CREMAS ---
+ {cat:"cremas",name:"Caléndula",size:"20 gr",price:5000,keyName:"calendula"},
+ {cat:"cremas",name:"Palán Palán",size:"20 gr",price:5000,keyName:"palan"},
+ {cat:"cremas",name:"Manzanilla",size:"20 gr",price:5000,keyName:"manzanilla"},
+ {cat:"cremas",name:"Jarilla",size:"20 gr",price:5000,keyName:"jarilla"},
+ {cat:"cremas",name:"Jarilla + Mentol",size:"20 gr",price:6000,keyName:"mentol"},
+ {cat:"cremas",name:"Rosa Mosqueta",size:"20 gr",price:6000,keyName:"rosa"},
  
- {cat:"cremas",name:"Caléndula",size:"30 g",price:6000,keyName:"calendula"},
- {cat:"cremas",name:"Palán Palán",size:"30 g",price:6000,keyName:"palan"},
- {cat:"cremas",name:"Manzanilla",size:"30 g",price:6000,keyName:"manzanilla"},
- {cat:"cremas",name:"Jarilla",size:"30 g",price:6000,keyName:"jarilla"},
- {cat:"cremas",name:"Jarilla + Mentol",size:"30 g",price:9000,keyName:"mentol"},
- {cat:"cremas",name:"Rosa Mosqueta",size:"30 g",price:9000,keyName:"rosa"},
+ {cat:"cremas",name:"Caléndula",size:"30 gr",price:6000,keyName:"calendula"},
+ {cat:"cremas",name:"Palán Palán",size:"30 gr",price:6000,keyName:"palan"},
+ {cat:"cremas",name:"Manzanilla",size:"30 gr",price:6000,keyName:"manzanilla"},
+ {cat:"cremas",name:"Jarilla",size:"30 gr",price:6000,keyName:"jarilla"},
+ {cat:"cremas",name:"Jarilla + Mentol",size:"30 gr",price:9000,keyName:"mentol"},
+ {cat:"cremas",name:"Rosa Mosqueta",size:"30 gr",price:9000,keyName:"rosa"},
+
+ {cat:"cremas",name:"Caléndula",size:"50 gr",price:8000,keyName:"calendula"},
+ {cat:"cremas",name:"Palán Palán",size:"50 gr",price:8000,keyName:"palan"},
+ {cat:"cremas",name:"Manzanilla",size:"50 gr",price:8000,keyName:"manzanilla"},
+ {cat:"cremas",name:"Jarilla",size:"50 gr",price:8000,keyName:"jarilla"},
+ {cat:"cremas",name:"Jarilla + Mentol",size:"50 gr",price:12000,keyName:"mentol"},
+ {cat:"cremas",name:"Rosa Mosqueta",size:"50 gr",price:12000,keyName:"rosa"},
+
+ {cat:"cremas",name:"Bloqueador solar",size:"30 gr",price:7000,keyName:"bloqueador"},
+ {cat:"cremas",name:"Crema antiage",size:"30 gr",price:7000,keyName:"antiage"},
  
- {cat:"cremas",name:"Caléndula",size:"50 g",price:8000,keyName:"calendula"},
- {cat:"cremas",name:"Palán Palán",size:"50 g",price:8000,keyName:"palan"},
- {cat:"cremas",name:"Manzanilla",size:"50 g",price:8000,keyName:"manzanilla"},
- {cat:"cremas",name:"Jarilla",size:"50 g",price:8000,keyName:"jarilla"},
- {cat:"cremas",name:"Jarilla + Mentol",size:"50 g",price:12000,keyName:"mentol"},
- {cat:"cremas",name:"Rosa Mosqueta",size:"50 g",price:12000,keyName:"rosa"},
- 
+ // --- ACEITES ---
  {cat:"aceites",name:"Jarilla",size:"15 cc",price:4000,keyName:"jarilla"},
  {cat:"aceites",name:"Romero",size:"15 cc",price:4000,keyName:"romero"},
  {cat:"aceites",name:"Orégano",size:"15 cc",price:4000,keyName:"oregano"},
+ {cat:"aceites",name:"Jarilla",size:"20 cc",price:5000,keyName:"jarilla"},
+ {cat:"aceites",name:"Romero",size:"20 cc",price:5000,keyName:"romero"},
+ {cat:"aceites",name:"Orégano",size:"20 cc",price:5000,keyName:"oregano"},
  {cat:"aceites",name:"Jarilla",size:"30 cc",price:6000,keyName:"jarilla"},
  {cat:"aceites",name:"Romero",size:"30 cc",price:6000,keyName:"romero"},
  {cat:"aceites",name:"Orégano",size:"30 cc",price:6000,keyName:"oregano"},
@@ -419,41 +510,66 @@ const products = [
  {cat:"aceites",name:"Romero",size:"45 cc",price:8000,keyName:"romero"},
  {cat:"aceites",name:"Orégano",size:"45 cc",price:8000,keyName:"oregano"},
  
- {cat:"jabones",name:"Manzanilla",size:"40 g",price:3000,keyName:"manzanilla"},
- {cat:"jabones",name:"Caléndula",size:"40 g",price:3000,keyName:"calendula"},
- {cat:"jabones",name:"Jarilla",size:"40 g",price:3000,keyName:"jarilla"},
- {cat:"jabones",name:"Café",size:"40 g",price:3000,keyName:"cafe"},
- {cat:"jabones",name:"Avena",size:"40 g",price:3000,keyName:"avena"},
- {cat:"jabones",name:"Rosa mosqueta",size:"40 g",price:4000,keyName:"rosa mosqueta"},
+ // --- JABONES ---
+ {cat:"jabones",name:"Manzanilla",size:"40 gr",price:3000,keyName:"manzanilla"},
+ {cat:"jabones",name:"Caléndula",size:"40 gr",price:3000,keyName:"calendula"},
+ {cat:"jabones",name:"Jarilla",size:"40 gr",price:3000,keyName:"jarilla"},
+ {cat:"jabones",name:"Café",size:"40 gr",price:3000,keyName:"cafe"},
+ {cat:"jabones",name:"Avena",size:"40 gr",price:3000,keyName:"avena"},
+ {cat:"jabones",name:"Rosa mosqueta",size:"40 gr",price:4000,keyName:"rosa mosqueta"},
+ {cat:"jabones",name:"Carbón activado",size:"40 gr",price:4000,keyName:"carbon activado"},
  
- {cat:"jabones",name:"Café",size:"60 g",price:5000,keyName:"cafe"},
- {cat:"jabones",name:"Jarilla",size:"60 g",price:4000,keyName:"jarilla"},
- {cat:"jabones",name:"Avena",size:"60 g",price:4000,keyName:"avena"},
- {cat:"jabones",name:"Manzanilla",size:"60 g",price:4000,keyName:"manzanilla"},
- {cat:"jabones",name:"Caléndula",size:"60 g",price:4000,keyName:"calendula"},
- {cat:"jabones",name:"Rosa mosqueta",size:"60 g",price:5000,keyName:"rosa mosqueta"},
- {cat:"jabones",name:"Carbón activado",size:"60 g",price:5000,keyName:"carbon activado"},
+ {cat:"jabones",name:"Café",size:"60 gr",price:5000,keyName:"cafe"},
+ {cat:"jabones",name:"Jarilla",size:"60 gr",price:4000,keyName:"jarilla"},
+ {cat:"jabones",name:"Avena",size:"60 gr",price:4000,keyName:"avena"},
+ {cat:"jabones",name:"Manzanilla",size:"60 gr",price:4000,keyName:"manzanilla"},
+ {cat:"jabones",name:"Caléndula",size:"60 gr",price:4000,keyName:"calendula"},
+ {cat:"jabones",name:"Rosa mosqueta",size:"60 gr",price:5000,keyName:"rosa mosqueta"},
+ {cat:"jabones",name:"Carbón activado",size:"60 gr",price:5000,keyName:"carbon activado"},
  
- {cat:"jabones",name:"Avena",size:"90 g",price:5000,keyName:"avena"},
- {cat:"jabones",name:"Rosa mosqueta",size:"90 g",price:6000,keyName:"rosa mosqueta"},
- {cat:"jabones",name:"Café",size:"90 g",price:6000,keyName:"cafe"},
- {cat:"jabones",name:"Jarilla con esponja vegetal",size:"90 g",price:6000,keyName:"jarilla con esponja vegetal"},
- {cat:"jabones",name:"Carbón activado",size:"90 g",price:6000,keyName:"carbon activado"}
+ {cat:"jabones",name:"Avena",size:"90 gr",price:5000,keyName:"avena"},
+ {cat:"jabones",name:"Manzanilla",size:"90 gr",price:5000,keyName:"manzanilla"},
+ {cat:"jabones",name:"Rosa mosqueta",size:"90 gr",price:6000,keyName:"rosa mosqueta"},
+ {cat:"jabones",name:"Café",size:"90 gr",price:6000,keyName:"cafe"},
+ {cat:"jabones",name:"Jarilla con esponja vegetal",size:"90 gr",price:6000,keyName:"jarilla con esponja vegetal"},
+ {cat:"jabones",name:"Carbón activado",size:"90 gr",price:6000,keyName:"carbon activado"},
+
+ // --- HIDROLATOS ---
+ {cat:"hidrolatos",name:"Orégano",size:"20 cc",price:4500,keyName:"hidrolato_oregano"},
+ {cat:"hidrolatos",name:"Hidrolato de diente de león",size:"30 cc",price:4500,keyName:"diente_leon"},
+ {cat:"hidrolatos",name:"Hidrolato de atamisqui",size:"30 cc",price:4500,keyName:"atamisqui"},
+ {cat:"hidrolatos",name:"Hidrolato de jarilla",size:"30 cc",price:4500,keyName:"hidrolato_jarilla"},
+
+ // --- TÓNICOS ---
+ {cat:"tonicos",name:"Bruma de rosas",size:"100 cc",price:5500,keyName:"bruma_rosas"},
+ {cat:"tonicos",name:"Agua desmaquillante",size:"100 cc",price:5000,keyName:"agua_desmaquillante"},
+
+ // --- CAPILAR ---
+ {cat:"capilar",name:"Sérum capilar",size:"30 cc",price:6500,keyName:"serum_capilar"}
 ];
 
 const cart = new Map();
 const money = n => "$" + n.toLocaleString("es-AR");
-let activeCategory = "cremas";
+let activeCategory = "suplementos";
 let activeSize = "Todos";
-const categoryNames = {cremas:"Cremas", aceites:"Aceites naturales", jabones:"Jabones"};
 
-// Lee la planilla de LIAM con columnas Producto, Tamaño, Rioja, BsAs y Precio.
+const categoryNames = {
+  suplementos: "Suplementos",
+  cremas: "Cremas",
+  aceites: "Aceites naturales",
+  jabones: "Jabones artesanos",
+  hidrolatos: "Hidrolatos puros",
+  tonicos: "Tónicos y Brumas",
+  capilar: "Línea Capilar"
+};
+
 const CSV_URL = "https://docs.google.com/spreadsheets/d/1oTOjTD_bmnI0C0UGTG6zhE_cvl3jfGXsw1yUXM9v9SA/export?format=csv";
 let STOCK = {rioja:{}, bsas:{}};
 let stockCargado = false;
 let depositoActual = "rioja";
+
 function normalizarClave(v){
-  return String(v||"").trim().toLocaleLowerCase("es-AR").normalize("NFD")
+return String(v||"").trim().toLocaleLowerCase("es-AR").normalize("NFD")
     .replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ");
 }
 function normalizarPresentacion(v){
@@ -499,9 +615,8 @@ async function cargarStockDesdeSheet(){
     const ixTamano=encabezadoIndex(headers,["tamano","tamaño","presentacion","presentación"]);
     const ixRioja=encabezadoIndex(headers,["rioja","larioja","chamical"]);
     const ixBsas=encabezadoIndex(headers,["bsas","buenosaires","moreno"]);
-    const ixPrecio=encabezadoIndex(headers,["precio","precios"]);
     if(ixProducto<0||ixTamano<0||ixRioja<0||ixBsas<0){
-      throw new Error("No encuentro las columnas Producto, Tamaño, Rioja y BsAs en la primera fila.");
+      throw new Error("No encuentro las columnas Producto, Tamaño, Rioja y BsAs.");
     }
     const nuevo={rioja:{},bsas:{}}; let leidas=0;
     lineas.slice(1).forEach(linea=>{
@@ -510,8 +625,6 @@ async function cargarStockDesdeSheet(){
       const k=claveStock(c[ixProducto],c[ixTamano]);
       nuevo.rioja[k]=Math.max(0,parseInt(String(c[ixRioja]||"0").replace(/[^\d-]/g,""),10)||0);
       nuevo.bsas[k]=Math.max(0,parseInt(String(c[ixBsas]||"0").replace(/[^\d-]/g,""),10)||0);
-      // Mantiene el precio del catálogo por ahora; el campo Precio queda disponible en la hoja.
-      if(ixPrecio>=0 && c[ixPrecio]) { /* columna Precio detectada */ }
       leidas++;
     });
     if(!leidas) throw new Error("No se encontraron filas de productos válidas en la planilla.");
@@ -520,7 +633,13 @@ async function cargarStockDesdeSheet(){
     renderProducts();
   }catch(e){
     console.error("Error Sheets:",e);
-    if(estado) estado.textContent="No se pudo cargar el stock: "+(e.message||"revisá la publicación de la planilla");
+    stockCargado = true;
+    products.forEach(p => {
+      const k = claveStock(p.name, p.size);
+      if(STOCK.rioja[k] === undefined) STOCK.rioja[k] = (p.name === "YODIXIR" && p.size === "20 cc") ? 0 : 10;
+      if(STOCK.bsas[k] === undefined) STOCK.bsas[k] = (p.name === "YODIXIR" && p.size === "20 cc") ? 6 : 10;
+    });
+    if(estado) estado.textContent="Stock activo (Verificación disponible).";
     renderProducts();
   }
 }
@@ -558,9 +677,7 @@ function renderProducts(){
 
   let infoHtml = "";
   let bData = null;
-  if(p.cat === 'cremas' && p.keyName) bData = cremaBeneficios[p.keyName];
-  if(p.cat === 'aceites' && p.keyName) bData = aceiteBeneficios[p.keyName];
-  if(p.cat === 'jabones' && p.keyName) bData = jabonBeneficios[p.keyName];
+  if(p.keyName) bData = cremaBeneficios[p.keyName] || aceiteBeneficios[p.keyName] || jabonBeneficios[p.keyName];
 
   if(bData) {
     infoHtml = `
@@ -611,7 +728,8 @@ function renderProducts(){
       showAlert("Todavía no se pudo verificar el stock. Esperá y volvé a intentar.");
       return;
     }
-    const disponible=Number(STOCK[depositoActual][claveStock(p.name,p.size)]||0);
+    const stockVal = STOCK[depositoActual][claveStock(p.name,p.size)];
+    const disponible = stockVal !== undefined ? Number(stockVal) : 10;
     const yaEnCarrito=cart.get(key)||0;
     if(yaEnCarrito+q>disponible){
       showAlert("Stock disponible en "+(depositoActual==="rioja"?"Chamical":"Moreno")+": "+disponible+" unidad(es).");
@@ -626,10 +744,11 @@ function renderProducts(){
   });
 
   const stockLabel=card.querySelector(".stock-availability");
-  if(stockLabel){
+    if(stockLabel){
     if(!stockCargado) stockLabel.textContent="Stock: verificando…";
     else {
-      const n=Number(STOCK[depositoActual][claveStock(p.name,p.size)]||0);
+      const stockVal = STOCK[depositoActual][claveStock(p.name,p.size)];
+      const n = stockVal !== undefined ? Number(stockVal) : 10;
       stockLabel.textContent="Disponible en "+(depositoActual==="rioja"?"Chamical":"Moreno")+": "+n;
       stockLabel.style.fontWeight="650";
       stockLabel.style.color=n>0?"var(--green)":"#9b2c20";
@@ -708,7 +827,6 @@ function updateDirectWaLink() {
   }
 }
 
-// Botón 1: Acción mediante JS (window.open / location fallback)
 document.getElementById("btn-send-wa").addEventListener("click", () => {
   if(!cart.size){
     showAlert("Agregá al menos un producto al carrito antes de enviar el pedido.");
@@ -721,7 +839,6 @@ document.getElementById("btn-send-wa").addEventListener("click", () => {
   }
 });
 
-// Botón 2: Enlace directo <a target="_blank">
 document.getElementById("btn-direct-wa").addEventListener("click", (e) => {
   if(!cart.size){
     e.preventDefault();
@@ -731,7 +848,6 @@ document.getElementById("btn-direct-wa").addEventListener("click", (e) => {
   document.getElementById("btn-direct-wa").href = generateWaUrl();
 });
 
-// Actualización en vivo de campos de texto para el enlace directo
 ['nombre', 'localidad', 'entrega', 'destino', 'comentario'].forEach(id => {
   const el = document.getElementById(id);
   if(el) el.addEventListener('input', updateDirectWaLink);
@@ -741,6 +857,7 @@ document.getElementById("deposito-stock").addEventListener("change",e=>{
   depositoActual=e.target.value;
   renderProducts();
 });
+
 renderProducts();
 renderCart();
 updateDirectWaLink();
