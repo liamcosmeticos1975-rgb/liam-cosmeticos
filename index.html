@@ -222,11 +222,12 @@ footer{text-align:center;padding:22px;color:#45634c;font-size:.88rem}
     
     <section class="card" style="margin:12px 0">
       <h2>📦 Stock por depósito</h2>
-      <label for="deposito-stock">Consultar disponibilidad en</label>
-      <select id="deposito-stock">
-        <option value="rioja">La Rioja · Chamical</option>
-        <option value="bsas">Buenos Aires · Moreno</option>
-      </select>
+      <label>Depósito de stock</label>
+<div class="depositos-box">
+<button id="btn-rioja" class="depot-btn active" type="button" onclick="setDeposito('rioja')">📦 La Rioja · Chamical</button>
+<button id="btn-bsas" class="depot-btn" type="button" onclick="setDeposito('bsas')">📦 Bs As · Moreno</button>
+</div>
+<select id="deposito-stock" style="display:none"><option value="rioja">La Rioja</option><option value="bsas">Bs As</option></select>
       <p id="stock-status" class="small" aria-live="polite">Conectando con el stock…</p>
     </section>
 
