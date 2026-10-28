@@ -35,7 +35,7 @@ footer{text-align:center;padding:22px;color:#45634c;font-size:.88rem}
 .tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:7px;margin:10px 0}
 .tabs .tab{padding:10px 5px;font-size:.88rem;background:#e5eee1;color:var(--green);border:1px solid var(--line);cursor:pointer;border-radius:10px;font-weight:600;text-align:center}
 .tabs .tab.active{background:var(--green);color:#fff}
- select#deposito-stock, select#destino {
+select#deposito-stock, select#destino {
   border: 2px solid #2f7048 !important;
   background-color: #f3f9f1 !important;
   font-weight: 700 !important;
@@ -196,7 +196,7 @@ footer{text-align:center;padding:22px;color:#45634c;font-size:.88rem}
     <div class="benefits-grid">
       <div class="benefit-card" style="margin:0;">
         <h3>📌 Modo de uso general</h3>
-        <p>Aplicar según la indicación específica de cada producto (tópico o sublingual). Uso diario. Conservar en lugar fresco y seco, alejado del sol directo y del calor excesivo.</p>
+        <p>Aplicar según la indicación específica de cada producto (tópico o sublingual). Uso diario. Conservar en lugar fresco y seco, alehado del sol directo y del calor excesivo.</p>
       </div>
       <div class="benefit-card" style="margin:0;">
         <h3>⚠️ Precauciones generales</h3>
@@ -233,16 +233,16 @@ footer{text-align:center;padding:22px;color:#45634c;font-size:.88rem}
 
     <h2>Categorías de productos</h2>
     <nav class="tabs" aria-label="Categorías de productos" id="category-tabs-container">
-      <button class="tab active" type="button" data-cat="suplementos">🌿 Suplementos</button>
-      <button class="tab" type="button" data-cat="cremas">✨ Cremas</button>
+      <button class="tab active" type="button" data-cat="cremas">✨ Cremas</button>
       <button class="tab" type="button" data-cat="aceites">🌱 Aceites</button>
       <button class="tab" type="button" data-cat="jabones">🍃 Jabones</button>
       <button class="tab" type="button" data-cat="hidrolatos">💧 Hidrolatos</button>
       <button class="tab" type="button" data-cat="tonicos">🌸 Tónicos</button>
       <button class="tab" type="button" data-cat="capilar">💆 Capilar</button>
+      <button class="tab" type="button" data-cat="suplementos">🌿 Suplementos</button>
     </nav>
     
-    <div id="category-title" class="category-title">Suplementos</div>
+    <div id="category-title" class="category-title">Cremas</div>
     <nav id="size-tabs" class="size-tabs" aria-label="Tamaño o presentación"></nav>
     <div id="products-panel" class="grid"></div>
     
@@ -283,7 +283,6 @@ footer{text-align:center;padding:22px;color:#45634c;font-size:.88rem}
 💵 Efectivo 
 </div>
 
-<div class="actions">
       <div class="actions">
         <button id="btn-send-wa" type="button">Enviar pedido por WhatsApp</button>
         <a id="btn-direct-wa" class="btn-link whatsapp-direct-btn" target="_blank" href="#">📱 Abrir chat directo de WhatsApp</a>
@@ -385,8 +384,8 @@ const cremaBeneficios = {
   },
   jarilla: {
     title: "Jarilla",
-    short: "Descontracturante natural, purificante y antioxidante.Elimina hongos de uñas y pies , ayuda a eliminar la hiperhidrosis.",
-    full: "Es descontracturante natural, alivia dolor de ciático, contracturas y tensión muscular.Antioxidante y purificante profundo. Limpia poros, regula grasa y combate hongos."
+    short: "Descontracturante natural, purificante y antioxidante. Elimina hongos de uñas y pies, ayuda a eliminar la hiperhidrosis.",
+    full: "Es descontracturante natural, alivia dolor de ciático, contracturas y tensión muscular. Antioxidante y purificante profundo. Limpia poros, regula grasa y combate hongos."
   },
   mentol: {
     title: "Jarilla + Mentol",
@@ -444,7 +443,7 @@ const jabonBeneficios = {
     short: "Desintoxicante y purificante profundo de poros.",
     full: "Absorbe el exceso de grasa, impurezas y toxinas. Excelente aliado contra el acné, puntos negros y pieles grasas."
   },
-  "jarilla con esponja vegetal": {
+  "jarilla c/esponja": {
     short: "Doble acción purificante y exfoliante física profunda.",
     full: "La esponja vegetal incorporada remueve células muertas y activa la circulación, mientras la jarilla aporta sus propiedades antisépticas."
   }
@@ -481,92 +480,92 @@ document.getElementById('btn-to-pedidos').addEventListener('click', () => showSe
 document.querySelectorAll('.btn-go-inicio').forEach(btn => btn.addEventListener('click', () => showSection('inicio')));
 document.querySelectorAll('.btn-go-pedidos').forEach(btn => btn.addEventListener('click', () => showSection('pedidos')));
 
+// Lista de productos: Nombre mostrado en web = "Orégano" / Vínculo de planilla = ORG-XX
 const products = [
- // --- SUPLEMENTOS ---
- {cat:"suplementos",name:"YODIXIR",size:"15 cc",price:4000,keyName:"yodixir"},
- {cat:"suplementos",name:"YODIXIR",size:"20 cc",price:4500,keyName:"yodixir"},
- {cat:"suplementos",name:"YODIXIR",size:"30 cc",price:6000,keyName:"yodixir"},
-
  // --- CREMAS ---
- {cat:"cremas",name:"Caléndula",size:"20 gr",price:5000,keyName:"calendula"},
- {cat:"cremas",name:"Palán Palán",size:"20 gr",price:5000,keyName:"palan"},
- {cat:"cremas",name:"Manzanilla",size:"20 gr",price:5000,keyName:"manzanilla"},
- {cat:"cremas",name:"Jarilla",size:"20 gr",price:5000,keyName:"jarilla"},
- {cat:"cremas",name:"Jarilla + Mentol",size:"20 gr",price:6000,keyName:"mentol"},
- {cat:"cremas",name:"Rosa Mosqueta",size:"20 gr",price:6000,keyName:"rosa"},
+ {cat:"cremas",name:"Caléndula",size:"20gr",price:5000,keyName:"calendula"},
+ {cat:"cremas",name:"Palán Palán",size:"20gr",price:5000,keyName:"palan"},
+ {cat:"cremas",name:"Manzanilla",size:"20gr",price:5000,keyName:"manzanilla"},
+ {cat:"cremas",name:"Jarilla",size:"20gr",price:5000,keyName:"jarilla"},
+ {cat:"cremas",name:"Jarilla + Mentol",size:"20gr",price:6000,keyName:"mentol"},
+ {cat:"cremas",name:"Rosa Mosqueta",size:"20gr",price:6000,keyName:"rosa"},
  
- {cat:"cremas",name:"Caléndula",size:"30 gr",price:6000,keyName:"calendula"},
- {cat:"cremas",name:"Palán Palán",size:"30 gr",price:6000,keyName:"palan"},
- {cat:"cremas",name:"Manzanilla",size:"30 gr",price:6000,keyName:"manzanilla"},
- {cat:"cremas",name:"Jarilla",size:"30 gr",price:6000,keyName:"jarilla"},
- {cat:"cremas",name:"Jarilla + Mentol",size:"30 gr",price:9000,keyName:"mentol"},
- {cat:"cremas",name:"Rosa Mosqueta",size:"30 gr",price:9000,keyName:"rosa"},
+ {cat:"cremas",name:"Caléndula",size:"30gr",price:6000,keyName:"calendula"},
+ {cat:"cremas",name:"Palán Palán",size:"30gr",price:6000,keyName:"palan"},
+ {cat:"cremas",name:"Manzanilla",size:"30gr",price:6000,keyName:"manzanilla"},
+ {cat:"cremas",name:"Jarilla",size:"30gr",price:6000,keyName:"jarilla"},
+ {cat:"cremas",name:"Jarilla + Mentol",size:"30gr",price:9000,keyName:"mentol"},
+ {cat:"cremas",name:"Rosa Mosqueta",size:"30gr",price:9000,keyName:"rosa"},
  
- {cat:"cremas",name:"Caléndula",size:"50 gr",price:8000,keyName:"calendula"},
- {cat:"cremas",name:"Palán Palán",size:"50 gr",price:8000,keyName:"palan"},
- {cat:"cremas",name:"Manzanilla",size:"50 gr",price:8000,keyName:"manzanilla"},
- {cat:"cremas",name:"Jarilla",size:"50 gr",price:8000,keyName:"jarilla"},
- {cat:"cremas",name:"Jarilla + Mentol",size:"50 gr",price:12000,keyName:"mentol"},
- {cat:"cremas",name:"Rosa Mosqueta",size:"50 gr",price:12000,keyName:"rosa"},
+ {cat:"cremas",name:"Caléndula",size:"50gr",price:8000,keyName:"calendula"},
+ {cat:"cremas",name:"Palán Palán",size:"50gr",price:8000,keyName:"palan"},
+ {cat:"cremas",name:"Manzanilla",size:"50gr",price:8000,keyName:"manzanilla"},
+ {cat:"cremas",name:"Jarilla",size:"50gr",price:8000,keyName:"jarilla"},
+ {cat:"cremas",name:"Jarilla + Mentol",size:"50gr",price:12000,keyName:"mentol"},
+ {cat:"cremas",name:"Rosa Mosqueta",size:"50gr",price:12000,keyName:"rosa"},
 
- {cat:"cremas",name:"Bloqueador solar",size:"30 gr",price:7000,keyName:"bloqueador"},
- {cat:"cremas",name:"Crema antiage",size:"30 gr",price:7000,keyName:"antiage"},
- 
- // --- ACEITES ---
- {cat:"aceites",name:"Jarilla",size:"15 cc",price:4000,keyName:"jarilla"},
- {cat:"aceites",name:"Romero",size:"15 cc",price:4000,keyName:"romero"},
- {cat:"aceites",name:"Orégano",size:"15 cc",price:4000,keyName:"oregano"},
- {cat:"aceites",name:"Jarilla",size:"20 cc",price:5000,keyName:"jarilla"},
- {cat:"aceites",name:"Romero",size:"20 cc",price:5000,keyName:"romero"},
- {cat:"aceites",name:"Orégano",size:"20 cc",price:5000,keyName:"oregano"},
- {cat:"aceites",name:"Jarilla",size:"30 cc",price:6000,keyName:"jarilla"},
- {cat:"aceites",name:"Romero",size:"30 cc",price:6000,keyName:"romero"},
- {cat:"aceites",name:"Orégano",size:"30 cc",price:6000,keyName:"oregano"},
- {cat:"aceites",name:"Jarilla",size:"45 cc",price:8000,keyName:"jarilla"},
- {cat:"aceites",name:"Romero",size:"45 cc",price:8000,keyName:"romero"},
- {cat:"aceites",name:"Orégano",size:"45 cc",price:8000,keyName:"oregano"},
- 
+ {cat:"cremas",name:"Bloqueador solar",size:"30gr",price:10000,keyName:"bloqueador"},
+ {cat:"cremas",name:"Crema antiage",size:"30gr",price:8000,keyName:"antiage"},
+
  // --- JABONES ---
- {cat:"jabones",name:"Manzanilla",size:"40 gr",price:3000,keyName:"manzanilla"},
- {cat:"jabones",name:"Caléndula",size:"40 gr",price:3000,keyName:"calendula"},
- {cat:"jabones",name:"Jarilla",size:"40 gr",price:3000,keyName:"jarilla"},
- {cat:"jabones",name:"Café",size:"40 gr",price:3000,keyName:"cafe"},
- {cat:"jabones",name:"Avena",size:"40 gr",price:3000,keyName:"avena"},
- {cat:"jabones",name:"Rosa mosqueta",size:"40 gr",price:4000,keyName:"rosa mosqueta"},
- {cat:"jabones",name:"Carbón activado",size:"40 gr",price:4000,keyName:"carbon activado"},
+ {cat:"jabones",name:"Manzanilla",size:"40gr",price:3000,keyName:"manzanilla"},
+ {cat:"jabones",name:"Caléndula",size:"40gr",price:3000,keyName:"calendula"},
+ {cat:"jabones",name:"Jarilla",size:"40gr",price:3000,keyName:"jarilla"},
+ {cat:"jabones",name:"Café",size:"40gr",price:3000,keyName:"cafe"},
+ {cat:"jabones",name:"Avena",size:"40gr",price:3000,keyName:"avena"},
+ {cat:"jabones",name:"Rosa mosqueta",size:"40gr",price:4000,keyName:"rosa mosqueta"},
+ {cat:"jabones",name:"Carbón activado",size:"40gr",price:4000,keyName:"carbon activado"},
  
- {cat:"jabones",name:"Café",size:"60 gr",price:5000,keyName:"cafe"},
- {cat:"jabones",name:"Jarilla",size:"60 gr",price:4000,keyName:"jarilla"},
- {cat:"jabones",name:"Avena",size:"60 gr",price:4000,keyName:"avena"},
- {cat:"jabones",name:"Manzanilla",size:"60 gr",price:4000,keyName:"manzanilla"},
- {cat:"jabones",name:"Caléndula",size:"60 gr",price:4000,keyName:"calendula"},
- {cat:"jabones",name:"Rosa mosqueta",size:"60 gr",price:5000,keyName:"rosa mosqueta"},
- {cat:"jabones",name:"Carbón activado",size:"60 gr",price:5000,keyName:"carbon activado"},
+ {cat:"jabones",name:"Café",size:"60gr",price:5000,keyName:"cafe"},
+ {cat:"jabones",name:"Jarilla",size:"60gr",price:4000,keyName:"jarilla"},
+ {cat:"jabones",name:"Avena",size:"60gr",price:4000,keyName:"avena"},
+ {cat:"jabones",name:"Manzanilla",size:"60gr",price:4000,keyName:"manzanilla"},
+ {cat:"jabones",name:"Caléndula",size:"60gr",price:4000,keyName:"calendula"},
+ {cat:"jabones",name:"Rosa mosqueta",size:"60gr",price:5000,keyName:"rosa mosqueta"},
+ {cat:"jabones",name:"Carbón activado",size:"60gr",price:5000,keyName:"carbon activado"},
  
- {cat:"jabones",name:"Avena",size:"90 gr",price:5000,keyName:"avena"},
- {cat:"jabones",name:"Manzanilla",size:"90 gr",price:5000,keyName:"manzanilla"},
- {cat:"jabones",name:"Rosa mosqueta",size:"90 gr",price:6000,keyName:"rosa mosqueta"},
- {cat:"jabones",name:"Café",size:"90 gr",price:6000,keyName:"cafe"},
- {cat:"jabones",name:"Jarilla con esponja vegetal",size:"90 gr",price:6000,keyName:"jarilla con esponja vegetal"},
- {cat:"jabones",name:"Carbón activado",size:"90 gr",price:6000,keyName:"carbon activado"},
+ {cat:"jabones",name:"Avena",size:"90gr",price:5000,keyName:"avena"},
+ {cat:"jabones",name:"Rosa mosqueta",size:"90gr",price:6000,keyName:"rosa mosqueta"},
+ {cat:"jabones",name:"Café",size:"90gr",price:6000,keyName:"cafe"},
+ {cat:"jabones",name:"Jarilla c/esponja",size:"90gr",price:6000,keyName:"jarilla c/esponja"},
+ {cat:"jabones",name:"Carbón activado",size:"90gr",price:6000,keyName:"carbon activado"},
+ {cat:"jabones",name:"Manzanilla",size:"90gr",price:5000,keyName:"manzanilla"},
+
+ // --- ACEITES ---
+ {cat:"aceites",name:"Jarilla",size:"15cc",price:4000,keyName:"jarilla"},
+ {cat:"aceites",name:"Jarilla",size:"20cc",price:5000,keyName:"jarilla"},
+ {cat:"aceites",name:"Jarilla",size:"30cc",price:6000,keyName:"jarilla"},
+ {cat:"aceites",name:"Jarilla",size:"45cc",price:8000,keyName:"jarilla"},
+ {cat:"aceites",name:"Romero",size:"15cc",price:4000,keyName:"romero"},
+ {cat:"aceites",name:"Romero",size:"30cc",price:6000,keyName:"romero"},
+ {cat:"aceites",name:"Romero",size:"45cc",price:8000,keyName:"romero"},
+ {cat:"aceites",name:"Orégano",size:"15cc",price:4000,keyName:"oregano",sheetName:"ORG-15"},
+ {cat:"aceites",name:"Orégano",size:"20cc",price:5000,keyName:"oregano",sheetName:"ORG-20"},
+ {cat:"aceites",name:"Orégano",size:"30cc",price:6000,keyName:"oregano",sheetName:"ORG-30"},
+ {cat:"aceites",name:"Orégano",size:"45cc",price:8000,keyName:"oregano",sheetName:"ORG-45"},
 
  // --- HIDROLATOS ---
- {cat:"hidrolatos",name:"Orégano",size:"20 cc",price:4500,keyName:"hidrolato_oregano"},
- {cat:"hidrolatos",name:"Hidrolato de diente de león",size:"30 cc",price:4500,keyName:"diente_leon"},
- {cat:"hidrolatos",name:"Hidrolato de atamisqui",size:"30 cc",price:4500,keyName:"atamisqui"},
- {cat:"hidrolatos",name:"Hidrolato de jarilla",size:"30 cc",price:4500,keyName:"hidrolato_jarilla"},
+ {cat:"hidrolatos",name:"Hidrolato de orégano",size:"20cc",price:4000,keyName:"hidrolato_oregano"},
+ {cat:"hidrolatos",name:"Hidrolato de diente de león",size:"30cc",price:6000,keyName:"diente_leon"},
+ {cat:"hidrolatos",name:"Hidrolato de atamisqui",size:"30cc",price:6000,keyName:"atamisqui"},
+ {cat:"hidrolatos",name:"Hidrolato de jarilla",size:"30cc",price:6000,keyName:"hidrolato_jarilla"},
 
  // --- TÓNICOS ---
- {cat:"tonicos",name:"Bruma de rosas",size:"100 cc",price:5500,keyName:"bruma_rosas"},
- {cat:"tonicos",name:"Agua desmaquillante",size:"100 cc",price:5000,keyName:"agua_desmaquillante"},
+ {cat:"tonicos",name:"Bruma de rosas y manzanilla",size:"60cc",price:8000,keyName:"bruma_rosas"},
+ {cat:"tonicos",name:"Agua desmaquillante de rosas y manzanilla",size:"60cc",price:8000,keyName:"agua_desmaquillante"},
 
  // --- CAPILAR ---
- {cat:"capilar",name:"Sérum capilar",size:"30 cc",price:6500,keyName:"serum_capilar"}
+ {cat:"capilar",name:"Sérum capilar",size:"30cc",price:7000,keyName:"serum_capilar"},
+
+ // --- SUPLEMENTOS ---
+ {cat:"suplementos",name:"YODIXIR",size:"15cc",price:4000,keyName:"yodixir"},
+ {cat:"suplementos",name:"YODIXIR",size:"20cc",price:6000,keyName:"yodixir"},
+ {cat:"suplementos",name:"YODIXIR",size:"30cc",price:8000,keyName:"yodixir"}
 ];
 
-const cart = new Map();
+ const cart = new Map();
 const money = n => "$" + n.toLocaleString("es-AR");
-let activeCategory = "suplementos";
+let activeCategory = "cremas";
 let activeSize = "Todos";
 
 const categoryNames = {
@@ -595,7 +594,7 @@ function normalizarProducto(v){
   let n=normalizarClave(v).replace(/\s+/g," ");
   n=n.replace(/^calendula$/,"calendula").replace(/^rosa mosqueta$/,"rosa mosqueta")
      .replace(/^carbon activado$/,"carbon activado")
-     .replace(/^jarilla c\/esponja( vegetal)?$/,"jarilla con esponja vegetal");
+     .replace(/^jarilla c\/esponja( vegetal)?$/,"jarilla c/esponja");
   return n;
 }
 function claveStock(nombre,presentacion){
@@ -651,9 +650,10 @@ async function cargarStockDesdeSheet(){
     console.error("Error Sheets:",e);
     stockCargado = true;
     products.forEach(p => {
-      const k = claveStock(p.name, p.size);
-      if(STOCK.rioja[k] === undefined) STOCK.rioja[k] = (p.name === "YODIXIR" && p.size === "20 cc") ? 0 : 10;
-      if(STOCK.bsas[k] === undefined) STOCK.bsas[k] = (p.name === "YODIXIR" && p.size === "20 cc") ? 6 : 10;
+      const nombreParaStock = p.sheetName || p.name;
+      const k = claveStock(nombreParaStock, p.size);
+      if(STOCK.rioja[k] === undefined) STOCK.rioja[k] = 0;
+      if(STOCK.bsas[k] === undefined) STOCK.bsas[k] = 5;
     });
     if(estado) estado.textContent="Stock activo (Verificación disponible).";
     renderProducts();
@@ -661,8 +661,14 @@ async function cargarStockDesdeSheet(){
 }
 
 function sizeOptions(cat){
- const sizes = [...new Set(products.filter(p=>p.cat===cat).map(p=>p.size))];
- return ["Todos", ...sizes];
+  const all = products.filter(p => p.cat === cat).map(p => p.size);
+  const seen = {};
+  const out = [];
+  all.forEach(s => {
+    const k = String(s).toLowerCase().replace(/\s+/g,'').replace('cc','').replace('gr','');
+    if(!seen[k]){ seen[k] = true; out.push(s); }
+  });
+  return ["Todos", ...out];
 }
 
 function renderProducts(){
@@ -686,7 +692,10 @@ function renderProducts(){
   sizeHost.appendChild(btn);
  });
 
- products.filter(p=>p.cat===activeCategory&&(activeSize==="Todos"||p.size===activeSize)).forEach(p=>{
+ const normalize = v => String(v).toLowerCase().replace(/\s+/g,'').replace('cc','').replace('gr','');
+ products.filter(p=>{
+  return p.cat===activeCategory && (activeSize==="Todos" || normalize(p.size)===normalize(activeSize));
+ }).forEach(p=>{
   const key=products.indexOf(p);
   const card=document.createElement("article");
   card.className="card";
@@ -744,8 +753,9 @@ function renderProducts(){
       showAlert("Todavía no se pudo verificar el stock. Esperá y volvé a intentar.");
       return;
     }
-    const stockVal = STOCK[depositoActual][claveStock(p.name,p.size)];
-    const disponible = stockVal !== undefined ? Number(stockVal) : 10;
+    const nombreParaStock = p.sheetName || p.name;
+    const stockVal = STOCK[depositoActual][claveStock(nombreParaStock, p.size)];
+    const disponible = stockVal !== undefined ? Number(stockVal) : 0;
     const yaEnCarrito=cart.get(key)||0;
     if(yaEnCarrito+q>disponible){
       showAlert("Stock disponible en "+(depositoActual==="rioja"?"Chamical":"Moreno")+": "+disponible+" unidad(es).");
@@ -763,8 +773,9 @@ function renderProducts(){
   if(stockLabel){
     if(!stockCargado) stockLabel.textContent="Stock: verificando…";
     else {
-      const stockVal = STOCK[depositoActual][claveStock(p.name,p.size)];
-      const n = stockVal !== undefined ? Number(stockVal) : 10;
+      const nombreParaStock = p.sheetName || p.name;
+      const stockVal = STOCK[depositoActual][claveStock(nombreParaStock, p.size)];
+      const n = stockVal !== undefined ? Number(stockVal) : 0;
       stockLabel.textContent="Disponible en "+(depositoActual==="rioja"?"Chamical":"Moreno")+": "+n;
       stockLabel.style.fontWeight="650";
       stockLabel.style.color=n>0?"var(--green)":"#9b2c20";
