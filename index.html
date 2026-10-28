@@ -862,9 +862,18 @@ document.getElementById("btn-direct-wa").addEventListener("click", (e) => {
   if(el) el.addEventListener('input', updateDirectWaLink);
 });
 
-document.getElementById("deposito-stock").addEventListener("change",e=>{
-  depositoActual=e.target.value;
+window.setDeposito=function(v){
+  depositoActual=v;
+  document.getElementById('deposito-stock').value=v;
+  const bR=document.getElementById('btn-rioja');
+  const bB=document.getElementById('btn-bsas');
+  if(bR) bR.classList.toggle('active',v==='rioja');
+  if(bB) bB.classList.toggle('active',v==='bsas');
   renderProducts();
+  renderCart();
+}
+document.getElementById("deposito-stock").addEventListener('change',(e)=>{
+  setDeposito(e.target.value);
 });
 
 renderProducts();
