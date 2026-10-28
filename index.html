@@ -683,7 +683,8 @@ function renderProducts(){
   btn.setAttribute("aria-pressed",String(active));
  });
  const sizes=sizeOptions(activeCategory);
- if(!sizes.includes(activeSize)) activeSize="Todos";
+ const norm = s => String(s).toLowerCase().replace(/\s+/g,"");
+if(!sizes.map(norm).includes(norm(activeSize))) activeSize="Todos";
  const sizeHost=document.getElementById("size-tabs");
  sizeHost.innerHTML="";
  sizes.forEach(size=>{
@@ -694,7 +695,7 @@ function renderProducts(){
   sizeHost.appendChild(btn);
  });
 
- products.filter(p=>p.cat===activeCategory&&(activeSize==="Todos"||p.size===activeSize)).forEach(p=>{
+products.filter(p=>p.cat===activeCategory&&(activeSize==="Todos"||norm(p.size)===norm(activeSize))).forEach(p=>{
   const key=products.indexOf(p);
   const card=document.createElement("article");
   card.className="card";
