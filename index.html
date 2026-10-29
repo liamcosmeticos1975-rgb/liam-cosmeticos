@@ -141,6 +141,27 @@ select#deposito-stock, select#destino {
   .qtyrow{flex-wrap:wrap}
   .qtyrow label{min-width:70px}
 }
+[hidden]{display:none!important}
+.delivery-options{margin:16px 0;padding:12px;background:#f7f5eb;border:1px solid var(--line);border-radius:14px}
+.delivery-options h3{font-size:1rem;color:var(--green);margin:14px 0 8px}
+.delivery-options h3:first-child{margin-top:0}
+.delivery-choice{display:flex;align-items:flex-start;gap:10px;padding:11px;background:#fff;border:1px solid #d5e0d1;border-radius:11px;margin:8px 0;cursor:pointer;font-weight:400;color:var(--ink)}
+.delivery-choice:has(input:checked){border:2px solid var(--leaf);background:#edf4e8;padding:10px}
+.delivery-choice input{width:18px;min-width:18px;margin:3px 0 0;accent-color:var(--green)}
+.delivery-choice span{display:flex;flex-direction:column;gap:4px;flex:1}
+.delivery-choice strong{color:var(--green);font-size:.96rem}
+.delivery-choice small{font-size:.82rem;line-height:1.4;color:#4d5d50;font-weight:400}
+.delivery-choice b{color:var(--green);font-size:.96rem}
+
+
+.delivery-prompt{margin:0 0 10px;color:var(--ink);font-size:.92rem}
+.delivery-types{display:grid;grid-template-columns:1fr;gap:9px}
+.delivery-type{background:#fff;color:var(--green);border:1px solid #b8cbb2;border-radius:12px;padding:13px;text-align:left;font-weight:700;font-size:.96rem;cursor:pointer}
+.delivery-type.active{background:#e8f1e3;border:2px solid var(--green);padding:12px}
+.delivery-group{margin-top:12px}
+.delivery-group[hidden]{display:none!important}
+
+
 </style>
 </head>
 <body>
@@ -261,12 +282,34 @@ select#deposito-stock, select#destino {
       <label for="localidad">Localidad</label>
       <input id="localidad" placeholder="¿De dónde sos?">
       
-      <label for="entrega">Entrega</label>
-      <select id="entrega">
-        <option>Coordinar por WhatsApp</option>
-        <option>Retiro a coordinar</option>
-        <option>Envío a coordinar</option>
-      </select>
+      <div class="delivery-options" id="delivery-options">
+        <p class="delivery-prompt" id="delivery-prompt">Primero elegí el depósito en “Stock por depósito”. Las opciones de entrega se adaptarán a esa ubicación.</p>
+        <button id="rioja-delivery-toggle" type="button" hidden aria-expanded="false" style="width:100%;text-align:left;padding:15px;border:2px solid #cbdcc8;border-radius:14px;background:#fff;margin:8px 0;color:#174d35;font-weight:700;font-size:1rem">📍 La Rioja · Chamical — Ver información de entrega ▾</button>
+        <div id="rioja-delivery-note" class="small" hidden style="padding:16px;border:2px solid #cbdcc8;border-radius:14px;background:#fff;margin:8px 0 12px;font-weight:600;color:#174d35">La entrega se coordina únicamente por WhatsApp. No hay opciones de puntos de entrega, retiro ni envío a domicilio para este depósito. Elegí el contacto de La Rioja para enviar tu pedido.</div>
+        <button id="bsas-delivery-toggle" type="button" hidden aria-expanded="false" style="width:100%;text-align:left;padding:15px;border:2px solid #cbdcc8;border-radius:14px;background:#fff;margin:8px 0;color:#174d35;font-weight:700;font-size:1rem">📍 Buenos Aires · Moreno — Ver opciones de entrega ▾</button>
+        <div class="delivery-types" role="group" aria-label="Tipo de entrega" hidden>
+          <button class="delivery-type" type="button" data-delivery-type="puntos">📍 Punto de entrega gratis</button>
+          <button class="delivery-type" type="button" data-delivery-type="retiros">🏪 Retiro gratis</button>
+          <button class="delivery-type" type="button" data-delivery-type="domicilio">🚚 Envío a domicilio</button>
+        </div>
+        <div class="delivery-group" data-delivery-group="puntos" hidden>
+          <h3>📍 Puntos de entrega gratis</h3>
+          <label class="delivery-choice"><input type="radio" name="entrega" value="Punto de entrega gratis · Moreno · viernes 10:00" data-cost="0"><span><strong>Moreno</strong><small>Viernes · 10:00 · GRATIS</small></span></label>
+          <label class="delivery-choice"><input type="radio" name="entrega" value="Punto de entrega gratis · General Rodríguez · viernes 11:00" data-cost="0"><span><strong>General Rodríguez</strong><small>Viernes · 11:00 · GRATIS</small></span></label>
+        </div>
+        <div class="delivery-group" data-delivery-group="retiros" hidden>
+          <h3>🏪 Retiros gratis</h3>
+          <label class="delivery-choice"><input type="radio" name="entrega" value="Retiro gratis · Rembrandt 6648, Francisco Álvarez · todos los días 7:00 a 22:00" data-cost="0"><span><strong>Francisco Álvarez</strong><small>Rembrandt 6648 · Todos los días, 7:00 a 22:00 · GRATIS</small></span></label>
+          <label class="delivery-choice"><input type="radio" name="entrega" value="Retiro gratis · Joaquín V. González 6846 y Shakespeare, Moreno · lunes a jueves 9:00 a 18:00" data-cost="0"><span><strong>Moreno</strong><small>Joaquín V. González 6846 y Shakespeare · Lunes a jueves, 9:00 a 18:00 · GRATIS</small></span></label>
+        </div>
+        <div class="delivery-group" data-delivery-group="domicilio" hidden>
+          <h3>🏍️ Envíos a domicilio en moto</h3><p class="delivery-prompt">Horario de entrega: de 9:00 a 17:00 hs.</p>
+          <label class="delivery-choice"><input type="radio" name="entrega" value="Envío a domicilio · Zona 1 (0 a 7 km) · $4.500" data-cost="4500"><span><strong>Zona 1 · 0 a 7 km</strong><small>Trujui, Barrio 2000, La Gloria, Mariló, San Cayetano, Las Catonas centro.</small><b>$4.500</b></span></label>
+          <label class="delivery-choice"><input type="radio" name="entrega" value="Envío a domicilio · Zona 2 (7 a 10 km) · $6.000" data-cost="6000"><span><strong>Zona 2 · 7 a 10 km</strong><small>Moreno Centro, La Reja Chica, Francisco Álvarez centro, B.º El Quijote, Paso del Rey centro y Villa Zapiola.</small><b>$6.000</b></span></label>
+          <label class="delivery-choice"><input type="radio" name="entrega" value="Envío a domicilio · Zona 3 (10 a 13 km) · $7.500" data-cost="7500"><span><strong>Zona 3 · 10 a 13 km</strong><small>Merlo Centro, Merlo Norte, General Rodríguez centro, Reja Grande.</small><b>$7.500</b></span></label>
+          <label class="delivery-choice"><input type="radio" name="entrega" value="Envío a domicilio · Zona 4 (13 a 16 km) · $10.000" data-cost="10000"><span><strong>Zona 4 · 13 a 16 km</strong><small>Ituzaingó, Libertad, San Antonio de Padua, Parque San Martín y Mariano Acosta (sin incluir el fondo).</small><b>$10.000</b></span></label>
+        </div>
+      </div>
       
       <label for="destino">Enviar pedido a</label>
       <select id="destino">
@@ -315,7 +358,8 @@ function showAlert(message) {
 document.getElementById('modal-close-btn').addEventListener('click', function() {
   document.getElementById('custom-modal').classList.add('hidden');
 });
-  const cremaBeneficios = {
+
+const cremaBeneficios = {
   yodixir: {
     title: "YODIXIR — Activa tu Metabolismo y cuida tu Tiroides",
     short: "Suplemento natural y vegano para activar el metabolismo y cuidar la tiroides.",
@@ -473,8 +517,7 @@ function showSection(id){
   });
   window.scrollTo({top:0, behavior:'smooth'});
 }
-
-document.getElementById('btn-to-beneficios').addEventListener('click', () => showSection('beneficios'));
+  document.getElementById('btn-to-beneficios').addEventListener('click', () => showSection('beneficios'));
 document.getElementById('btn-to-pedidos').addEventListener('click', () => showSection('pedidos'));
 document.querySelectorAll('.btn-go-inicio').forEach(btn => btn.addEventListener('click', () => showSection('inicio')));
 document.querySelectorAll('.btn-go-pedidos').forEach(btn => btn.addEventListener('click', () => showSection('pedidos')));
@@ -561,8 +604,7 @@ const products = [
  {cat:"suplementos",name:"YODIXIR",size:"20cc",price:6000,keyName:"yodixir"},
  {cat:"suplementos",name:"YODIXIR",size:"30cc",price:8000,keyName:"yodixir"}
 ];
-
-const cart = new Map();
+  const cart = new Map();
 const money = n => "$" + n.toLocaleString("es-AR");
 let activeCategory = "cremas";
 let activeSize = "Todos";
@@ -823,11 +865,14 @@ function generateWaUrl() {
  const phone = document.getElementById("destino").value;
  const name = document.getElementById("nombre").value.trim();
  const localidad = document.getElementById("localidad").value.trim();
- const entrega = document.getElementById("entrega").value;
+ const entregaElegida = document.querySelector('input[name="entrega"]:checked');
+ const entrega = entregaElegida ? entregaElegida.value : "A coordinar por WhatsApp";
+ const costoEntrega = entregaElegida ? (parseInt(entregaElegida.dataset.cost || "0", 10) || 0) : 0;
  const comentario = document.getElementById("comentario").value.trim();
  
  let total = 0;
- const lines = ["🌿 *PEDIDO — LIAM COSMÉTICOS VEGANOS*",""];
+ const depositoNombre = document.getElementById("deposito-stock").value === "bsas" ? "Buenos Aires · Moreno" : "La Rioja · Chamical";
+ const lines = ["🌿 *PEDIDO — LIAM COSMÉTICOS VEGANOS*",`*Depósito elegido: ${depositoNombre}*`,""];
  for(const [key,qty] of cart){
   const p = products[key];
   if(!p) continue;
@@ -836,7 +881,10 @@ function generateWaUrl() {
   lines.push(`• *${p.name}* (${p.size}) × ${qty} — ${money(sub)}`);
  }
  
- lines.push("",`*TOTAL: ${money(total)}*`,"",`*Nombre:* ${name||"No indicado"}`,`*Localidad:* ${localidad||"No indicada"}`,`*Entrega:* ${entrega}`);
+ lines.push("",`*Subtotal de productos: ${money(total)}*`);
+ if(costoEntrega > 0) lines.push(`*Costo de envío: ${money(costoEntrega)}*`,`*Total estimado con envío: ${money(total+costoEntrega)}*`);
+ else lines.push("*Costo de entrega/retiro: GRATIS*",`*Total estimado: ${money(total)}*`);
+ lines.push("",`*Nombre:* ${name||"No indicado"}`,`*Localidad:* ${localidad||"No indicada"}`,`*Entrega elegida:* ${entrega}`);
  if(comentario) lines.push(`*Comentario:* ${comentario}`);
  lines.push("","Hola, quisiera confirmar disponibilidad y coordinar este pedido. ¡Gracias!");
  
@@ -851,9 +899,8 @@ function updateDirectWaLink() {
   } else {
     directLink.href = generateWaUrl();
   }
-}
-
-document.getElementById("btn-send-wa").addEventListener("click", () => {
+  }
+  document.getElementById("btn-send-wa").addEventListener("click", () => {
   if(!cart.size){
     showAlert("Agregá al menos un producto al carrito antes de enviar el pedido.");
     return;
@@ -874,10 +921,51 @@ document.getElementById("btn-direct-wa").addEventListener("click", (e) => {
   document.getElementById("btn-direct-wa").href = generateWaUrl();
 });
 
-['nombre', 'localidad', 'entrega', 'destino', 'comentario'].forEach(id => {
+['nombre', 'localidad', 'destino', 'comentario'].forEach(id => {
   const el = document.getElementById(id);
   if(el) el.addEventListener('input', updateDirectWaLink);
 });
+
+document.querySelectorAll('.delivery-type').forEach(button => {
+  button.setAttribute('aria-pressed','false');
+  button.addEventListener('click', () => {
+    const type = button.dataset.deliveryType;
+    document.querySelectorAll('.delivery-type').forEach(b => {
+      b.classList.toggle('active', b === button);
+      b.setAttribute('aria-pressed', b === button ? 'true' : 'false');
+    });
+    document.querySelectorAll('.delivery-group').forEach(group => {
+      group.hidden = group.dataset.deliveryGroup !== type;
+    });
+    updateDirectWaLink();
+  });
+});
+
+function actualizarEntregaPorDeposito() {
+  const esBuenosAires = document.getElementById('deposito-stock').value === 'bsas';
+  const destino = document.getElementById('destino');
+  destino.value = esBuenosAires ? '5491122547458' : '5493826512455';
+  document.querySelectorAll('input[name="entrega"]').forEach(input => input.checked = false);
+  document.querySelectorAll('.delivery-group').forEach(group => group.hidden = true);
+  document.querySelector('.delivery-types').hidden = true;
+  document.querySelectorAll('.delivery-type').forEach(button => {
+    button.classList.remove('active');
+    button.setAttribute('aria-pressed','false');
+    button.hidden = false;
+  });
+  const riojaToggle = document.getElementById('rioja-delivery-toggle');
+  const riojaNote = document.getElementById('rioja-delivery-note');
+  const bsasToggle = document.getElementById('bsas-delivery-toggle');
+  riojaToggle.hidden = false;
+  riojaNote.hidden = true;
+  riojaToggle.setAttribute('aria-expanded','false');
+  riojaToggle.textContent = '📍 La Rioja · Chamical — Ver información de entrega ▾';
+  bsasToggle.hidden = false;
+  bsasToggle.setAttribute('aria-expanded','false');
+  bsasToggle.textContent = '📍 Buenos Aires · Moreno — Ver opciones de entrega ▾';
+  document.getElementById('delivery-prompt').textContent = 'Elegí un depósito para ver la información de entrega correspondiente.';
+  updateDirectWaLink();
+}
 
 window.setDeposito=function(v){
   depositoActual=v;
@@ -888,13 +976,36 @@ window.setDeposito=function(v){
   if(bB) bB.classList.toggle('active',v==='bsas');
   renderProducts();
   renderCart();
+  actualizarEntregaPorDeposito();
 }
+document.getElementById('rioja-delivery-toggle').addEventListener('click',()=>{
+  if (document.getElementById('deposito-stock').value !== 'rioja') setDeposito('rioja');
+  const note = document.getElementById('rioja-delivery-note');
+  const opening = note.hidden;
+  note.hidden = !opening;
+  document.getElementById('rioja-delivery-toggle').setAttribute('aria-expanded',String(opening));
+  document.getElementById('rioja-delivery-toggle').textContent = opening ? '📍 La Rioja · Chamical — Ocultar información ▴' : '📍 La Rioja · Chamical — Ver información de entrega ▾';
+});
+document.getElementById('bsas-delivery-toggle').addEventListener('click',()=>{
+  if (document.getElementById('deposito-stock').value !== 'bsas') setDeposito('bsas');
+  const types = document.querySelector('.delivery-types');
+  const opening = types.hidden;
+  types.hidden = !opening;
+  document.getElementById('bsas-delivery-toggle').setAttribute('aria-expanded',String(opening));
+  document.getElementById('bsas-delivery-toggle').textContent = opening ? '📍 Buenos Aires · Moreno — Ocultar opciones de entrega ▴' : '📍 Buenos Aires · Moreno — Ver opciones de entrega ▾';
+  if (!opening) {
+    document.querySelectorAll('.delivery-group').forEach(group => group.hidden = true);
+    document.querySelectorAll('.delivery-type').forEach(button => { button.classList.remove('active'); button.setAttribute('aria-pressed','false'); });
+  }
+});
+
 document.getElementById("deposito-stock").addEventListener('change',(e)=>{
   setDeposito(e.target.value);
 });
 
 renderProducts();
 renderCart();
+actualizarEntregaPorDeposito();
 updateDirectWaLink();
 cargarStockDesdeSheet();
 setInterval(cargarStockDesdeSheet,60000);
