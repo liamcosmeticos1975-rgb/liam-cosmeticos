@@ -315,8 +315,7 @@ function showAlert(message) {
 document.getElementById('modal-close-btn').addEventListener('click', function() {
   document.getElementById('custom-modal').classList.add('hidden');
 });
-
-const cremaBeneficios = {
+  const cremaBeneficios = {
   yodixir: {
     title: "YODIXIR — Activa tu Metabolismo y cuida tu Tiroides",
     short: "Suplemento natural y vegano para activar el metabolismo y cuidar la tiroides.",
@@ -563,7 +562,7 @@ const products = [
  {cat:"suplementos",name:"YODIXIR",size:"30cc",price:8000,keyName:"yodixir"}
 ];
 
- const cart = new Map();
+const cart = new Map();
 const money = n => "$" + n.toLocaleString("es-AR");
 let activeCategory = "cremas";
 let activeSize = "Todos";
