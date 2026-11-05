@@ -26,7 +26,7 @@ button, .btn-link{font:inherit;border:0;border-radius:10px;padding:12px 14px;bac
 button.secondary, .btn-link.secondary{background:#e5eee1;color:var(--green);border:1px solid var(--line)}
 button.remove{background:#f7e7e3;color:#7d2c20;padding:7px 10px;width:auto}
 .cartline{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e4e9df}
-.cartline .details{flex:1}.small{font-size:.88rem;color:#4d5d50}
+.cartline .details{flex:1}.cart-category{display:inline-block;margin:3px 0 5px;padding:3px 8px;border:1px solid #d8c58f;border-radius:999px;background:#f7f0df;color:#526b43;font-size:.75rem;font-weight:750;letter-spacing:.2px}.small{font-size:.88rem;color:#4d5d50}
 .total{font-size:1.35rem;font-weight:800;color:var(--green);text-align:right;padding:12px 0}
 .actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
 footer{text-align:center;padding:22px;color:#45634c;font-size:.88rem}
@@ -142,6 +142,18 @@ select#deposito-stock, select#destino {
   .qtyrow label{min-width:70px}
 }
 [hidden]{display:none!important}
+
+.cart-float{position:fixed;right:16px;bottom:18px;z-index:9000;width:auto;min-width:150px;border-radius:999px;padding:13px 18px;box-shadow:0 5px 18px #174d3240;display:flex;align-items:center;justify-content:center;gap:9px}
+.cart-count{display:inline-flex;align-items:center;justify-content:center;min-width:25px;height:25px;padding:0 6px;border-radius:50px;background:#fff;color:var(--green);font-size:.85rem;font-weight:800}
+.cart-drawer-backdrop{position:fixed;inset:0;background:rgba(13,30,18,.48);z-index:9990}
+.cart-drawer{position:fixed;z-index:9991;top:0;right:0;height:100dvh;width:min(380px,94vw);overflow-y:auto;background:var(--cream);padding:14px 14px 28px;box-shadow:-8px 0 28px #102b1830;transform:translateX(105%);transition:transform .28s ease;visibility:hidden}
+.cart-drawer.open{transform:translateX(0);visibility:visible}
+.drawer-heading{position:sticky;top:-14px;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 4px;background:var(--cream);border-bottom:1px solid var(--line);margin-bottom:10px}
+.drawer-heading strong{display:block;color:var(--green);font-size:1.15rem}.drawer-heading small{display:block;color:#4d5d50;margin-top:3px}
+.drawer-close{width:42px;height:42px;padding:0;border-radius:50%;background:#e5eee1;color:var(--green);border:1px solid var(--line);font-size:1.1rem}
+body.drawer-open{overflow:hidden}
+@media(max-width:420px){.cart-float{right:12px;bottom:12px}.cart-drawer{width:96vw;padding:12px 10px 24px}}
+
 .delivery-options{margin:16px 0;padding:12px;background:#f7f5eb;border:1px solid var(--line);border-radius:14px}
 .delivery-options h3{font-size:1rem;color:var(--green);margin:14px 0 8px}
 .delivery-options h3:first-child{margin-top:0}
@@ -267,7 +279,11 @@ select#deposito-stock, select#destino {
     <nav id="size-tabs" class="size-tabs" aria-label="Tamaño o presentación"></nav>
     <div id="products-panel" class="grid"></div>
     
-    <section class="card" style="margin-top:18px">
+    <button id="open-cart-drawer" class="cart-float" type="button" aria-controls="cart-drawer" aria-expanded="false">🛒 Ver carrito <span id="cart-count" class="cart-count">0</span></button>
+    <div id="cart-drawer-backdrop" class="cart-drawer-backdrop" hidden></div>
+    <aside id="cart-drawer" class="cart-drawer" aria-label="Carrito y opciones de envío" aria-hidden="true">
+      <div class="drawer-heading"><div><strong>🛒 Tu pedido</strong><small>Revisá tus productos y elegí la entrega</small></div><button id="close-cart-drawer" class="drawer-close" type="button" aria-label="Cerrar carrito">✕</button></div>
+    <section class="card" style="margin-top:8px">
       <h2>🛒 Tu pedido</h2>
       <div id="cart"><p class="small">Todavía no agregaste productos.</p></div>
       <div class="total" id="total">Total: $0</div>
@@ -303,7 +319,7 @@ select#deposito-stock, select#destino {
           <label class="delivery-choice"><input type="radio" name="entrega" value="Retiro gratis · Joaquín V. González 6846 y Shakespeare, Moreno · lunes a jueves 9:00 a 18:00" data-cost="0"><span><strong>Moreno</strong><small>Joaquín V. González 6846 y Shakespeare · Lunes a jueves, 9:00 a 18:00 · GRATIS</small></span></label>
         </div>
         <div class="delivery-group" data-delivery-group="domicilio" hidden>
-          <h3>🏍️ Envíos a domicilio en moto</h3><p class="delivery-prompt">Horario de entrega: de 9:00 a 17:00 hs.</p>
+          <h3>🏍️ Envíos a domicilio en moto</h3><p class="delivery-prompt">Horario de entrega: de 9:00 a 17: 00 hs.</p>
           <label class="delivery-choice"><input type="radio" name="entrega" value="Envío a domicilio · Zona 1 (0 a 7 km) · $4.500" data-cost="4500"><span><strong>Zona 1 · 0 a 7 km</strong><small>Trujui, Barrio 2000, La Gloria, Mariló, San Cayetano, Las Catonas centro.</small><b>$4.500</b></span></label>
           <label class="delivery-choice"><input type="radio" name="entrega" value="Envío a domicilio · Zona 2 (7 a 10 km) · $6.000" data-cost="6000"><span><strong>Zona 2 · 7 a 10 km</strong><small>Moreno Centro, La Reja Chica, Francisco Álvarez centro, B.º El Quijote, Paso del Rey centro y Villa Zapiola.</small><b>$6.000</b></span></label>
           <label class="delivery-choice"><input type="radio" name="entrega" value="Envío a domicilio · Zona 3 (10 a 13 km) · $7.500" data-cost="7500"><span><strong>Zona 3 · 10 a 13 km</strong><small>Merlo Centro, Merlo Norte, General Rodríguez centro, Reja Grande.</small><b>$7.500</b></span></label>
@@ -332,6 +348,7 @@ select#deposito-stock, select#destino {
       </div>
       <p class="small">Si el botón principal no abre la aplicación por restricciones de tu navegador o iframe, usá el botón verde directo de WhatsApp.</p>
     </section>
+    </aside>
   </section>
 </main>
 
@@ -517,7 +534,8 @@ function showSection(id){
   });
   window.scrollTo({top:0, behavior:'smooth'});
 }
-  document.getElementById('btn-to-beneficios').addEventListener('click', () => showSection('beneficios'));
+
+document.getElementById('btn-to-beneficios').addEventListener('click', () => showSection('beneficios'));
 document.getElementById('btn-to-pedidos').addEventListener('click', () => showSection('pedidos'));
 document.querySelectorAll('.btn-go-inicio').forEach(btn => btn.addEventListener('click', () => showSection('inicio')));
 document.querySelectorAll('.btn-go-pedidos').forEach(btn => btn.addEventListener('click', () => showSection('pedidos')));
@@ -604,7 +622,8 @@ const products = [
  {cat:"suplementos",name:"YODIXIR",size:"20cc",price:6000,keyName:"yodixir"},
  {cat:"suplementos",name:"YODIXIR",size:"30cc",price:8000,keyName:"yodixir"}
 ];
-  const cart = new Map();
+
+ const cart = new Map();
 const money = n => "$" + n.toLocaleString("es-AR");
 let activeCategory = "cremas";
 let activeSize = "Todos";
@@ -844,7 +863,7 @@ function renderCart(){
   total+=sub;
   const line=document.createElement("div");
   line.className="cartline";
-  line.innerHTML=`<div class="details"><strong>${p.name}</strong><div class="small">${p.size} · ${qty} unidad(es) × ${money(p.price)}</div><strong>${money(sub)}</strong></div><button class="remove" type="button" aria-label="Quitar ${p.name}">Quitar</button>`;
+  line.innerHTML=`<div class="details"><span class="cart-category">${categoryNames[p.cat] || p.cat}</span><strong>${p.name}</strong><div class="small">${p.size} · ${qty} unidad(es) × ${money(p.price)}</div><strong>${money(sub)}</strong></div><button class="remove" type="button" aria-label="Quitar ${p.name}">Quitar</button>`;
   line.querySelector("button").addEventListener("click",()=>{
     cart.delete(key);
     renderCart();
@@ -853,6 +872,9 @@ function renderCart(){
   host.appendChild(line);
  }
  document.getElementById("total").textContent="Total: "+money(total);
+ const count=[...cart.values()].reduce((sum,n)=>sum+n,0);
+ const countEl=document.getElementById("cart-count");
+ if(countEl) countEl.textContent=String(count);
 }
 
 document.getElementById("clear").addEventListener("click",()=>{
@@ -878,7 +900,7 @@ function generateWaUrl() {
   if(!p) continue;
   const sub = p.price * qty;
   total += sub;
-  lines.push(`• *${p.name}* (${p.size}) × ${qty} — ${money(sub)}`);
+  lines.push(`• *Categoría: ${categoryNames[p.cat] || p.cat}* — *${p.name}* (${p.size}) × ${qty} — ${money(sub)}`);
  }
  
  lines.push("",`*Subtotal de productos: ${money(total)}*`);
@@ -899,8 +921,9 @@ function updateDirectWaLink() {
   } else {
     directLink.href = generateWaUrl();
   }
-  }
-  document.getElementById("btn-send-wa").addEventListener("click", () => {
+}
+
+document.getElementById("btn-send-wa").addEventListener("click", () => {
   if(!cart.size){
     showAlert("Agregá al menos un producto al carrito antes de enviar el pedido.");
     return;
@@ -1002,6 +1025,27 @@ document.getElementById('bsas-delivery-toggle').addEventListener('click',()=>{
 document.getElementById("deposito-stock").addEventListener('change',(e)=>{
   setDeposito(e.target.value);
 });
+
+const cartDrawer=document.getElementById('cart-drawer');
+const cartBackdrop=document.getElementById('cart-drawer-backdrop');
+function openCartDrawer(){
+  cartDrawer.classList.add('open');
+  cartDrawer.setAttribute('aria-hidden','false');
+  document.getElementById('open-cart-drawer').setAttribute('aria-expanded','true');
+  cartBackdrop.hidden=false;
+  document.body.classList.add('drawer-open');
+}
+function closeCartDrawer(){
+  cartDrawer.classList.remove('open');
+  cartDrawer.setAttribute('aria-hidden','true');
+  document.getElementById('open-cart-drawer').setAttribute('aria-expanded','false');
+  cartBackdrop.hidden=true;
+  document.body.classList.remove('drawer-open');
+}
+document.getElementById('open-cart-drawer').addEventListener('click',openCartDrawer);
+document.getElementById('close-cart-drawer').addEventListener('click',closeCartDrawer);
+cartBackdrop.addEventListener('click',closeCartDrawer);
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeCartDrawer();});
 
 renderProducts();
 renderCart();
