@@ -19,9 +19,6 @@ h2{font-size:1.3rem;color:var(--green);margin:12px 0}
 .card{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff;box-shadow:0 2px 8px #174d320b;display:flex;flex-direction:column;justify-content:space-between}
 .card h3{margin:0 0 6px;color:var(--green);font-size:1.06rem}
 .price{font-weight:700;color:var(--green);margin:6px 0}
-.stock-availability{font-weight:700;margin:7px 0 4px}
-.stock-availability.stock-in{color:#247a3d}
-.stock-availability.stock-order{color:#8aaa79}
 label{display:block;font-size:.9rem;margin:8px 0 4px;font-weight:600;color:var(--green)}
 select,input,textarea{width:100%;font:inherit;border:1px solid #aabda9;border-radius:9px;padding:10px;background:#fff}
 .qtyrow{display:flex;align-items:center;gap:8px;margin-top:10px}.qtyrow input{width:78px}.qtyrow button{flex:1}
@@ -146,7 +143,7 @@ select#deposito-stock, select#destino {
 }
 [hidden]{display:none!important}
 
-.cart-float{position:fixed;right:16px;bottom:18px;z-index:9000;width:auto;min-width:150px;border-radius:999px;padding:13px 18px;box-shadow:0 5px 18px #174d3240;display:flex;align-items:center;justify-content:center;gap:9px}
+.added-toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);background:#174d32;color:#fff;padding:11px 18px;border-radius:999px;box-shadow:0 4px 14px #174d3240;z-index:10000;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;font-weight:700;font-size:.9rem}.added-toast.show{opacity:1;transform:translate(-50%,0)}.stock-availability{display:inline-block;margin:8px 0;padding:5px 9px;border-radius:8px;font-size:.85rem}.stock-availability.stock-order{background:#f7efdc;color:#8a6418}.stock-availability.stock-in{background:#e8f3e8;color:#174d32}.cart-float{position:fixed;right:16px;bottom:18px;z-index:9000;width:auto;min-width:150px;border-radius:999px;padding:13px 18px;box-shadow:0 5px 18px #174d3240;display:flex;align-items:center;justify-content:center;gap:9px}
 .cart-count{display:inline-flex;align-items:center;justify-content:center;min-width:25px;height:25px;padding:0 6px;border-radius:50px;background:#fff;color:var(--green);font-size:.85rem;font-weight:800}
 .cart-drawer-backdrop{position:fixed;inset:0;background:rgba(13,30,18,.48);z-index:9990}
 .cart-drawer{position:fixed;z-index:9991;top:0;right:0;height:100dvh;width:min(380px,94vw);overflow-y:auto;background:var(--cream);padding:14px 14px 28px;box-shadow:-8px 0 28px #102b1830;transform:translateX(105%);transition:transform .28s ease;visibility:hidden}
@@ -310,8 +307,8 @@ body.drawer-open{overflow:hidden}
           <button class="delivery-type" type="button" data-delivery-type="puntos">📍 Punto de entrega gratis</button>
           <button class="delivery-type" type="button" data-delivery-type="retiros">🏪 Retiro gratis</button>
           <button class="delivery-type" type="button" data-delivery-type="domicilio">🚚 Envío a domicilio</button>
-        </div>
-        <div class="delivery-group" data-delivery-group="puntos" hidden>
+  </div>
+    <div class="delivery-group" data-delivery-group="puntos" hidden>
           <h3>📍 Puntos de entrega gratis</h3>
           <label class="delivery-choice"><input type="radio" name="entrega" value="Punto de entrega gratis · Moreno · viernes 10:00" data-cost="0"><span><strong>Moreno</strong><small>Viernes · 10:00 · GRATIS</small></span></label>
           <label class="delivery-choice"><input type="radio" name="entrega" value="Punto de entrega gratis · General Rodríguez · viernes 11:00" data-cost="0"><span><strong>General Rodríguez</strong><small>Viernes · 11:00 · GRATIS</small></span></label>
@@ -321,11 +318,7 @@ body.drawer-open{overflow:hidden}
           <label class="delivery-choice"><input type="radio" name="entrega" value="Retiro gratis · Rembrandt 6648, Francisco Álvarez · todos los días 7:00 a 22:00" data-cost="0"><span><strong>Francisco Álvarez</strong><small>Rembrandt 6648 · Todos los días, 7:00 a 22:00 · GRATIS</small></span></label>
           <label class="delivery-choice"><input type="radio" name="entrega" value="Retiro gratis · Joaquín V. González 6846 y Shakespeare, Moreno · lunes a jueves 9:00 a 18:00" data-cost="0"><span><strong>Moreno</strong><small>Joaquín V. González 6846 y Shakespeare · Lunes a jueves, 9:00 a 18:00 · GRATIS</small></span></label>
         </div>
-        <div class="delivery-group" data-delivery-group="retiros" hidden>
-          <h3>🏪 Retiros gratis</h3>
-          <label class="delivery-choice"><input type="radio" name="entrega" value="Retiro gratis · Rembrandt 6648, Francisco Álvarez · todos los días 7:00 a 22:00" data-cost="0"><span><strong>Francisco Álvarez</strong><small>Rembrandt 6648 · Todos los días, 7:00 a 22:00 · GRATIS</small></span></label>
-          <label class="delivery-choice"><input type="radio" name="entrega" value="Retiro gratis · Joaquín V. González 6846 y Shakespeare, Moreno · lunes a jueves 9:00 a 18:00" data-cost="0"><span><strong>Moreno</strong><small>Joaquín V. González 6846 y Shakespeare · Lunes a jueves, 9:00 a 18:00 · GRATIS</small></span></label>
-        </div>
+        
         <div class="delivery-group" data-delivery-group="domicilio" hidden>
           <h3>🏍️ Envíos a domicilio en moto</h3><p class="delivery-prompt">Horario de entrega: de 9:00 a 17:00 hs.</p>
           <label class="delivery-choice"><input type="radio" name="entrega" value="Envío a domicilio · Zona 1 (0 a 7 km) · $4.500" data-cost="4500"><span><strong>Zona 1 · 0 a 7 km</strong><small>Trujui, Barrio 2000, La Gloria, Mariló, San Cayetano, Las Catonas centro.</small><b>$4.500</b></span></label>
@@ -340,7 +333,6 @@ body.drawer-open{overflow:hidden}
         <option value="5493826512455">La Rioja · 3826 51-2455</option>
         <option value="5491122547458">Buenos Aires · 11 2254-7458</option>
       </select>
-      
       
       <label for="comentario">Comentario (opcional)</label>
       <textarea id="comentario" rows="2" placeholder="Aclaraciones, consulta, etc."></textarea>
@@ -369,6 +361,7 @@ body.drawer-open{overflow:hidden}
   </div>
 </div>
 
+<div id="added-toast" class="added-toast" role="status" aria-live="polite">Producto agregado al pedido ✓</div>
 <footer>LIAM Cosméticos Veganos · Hecho con cariño en La Rioja 🌿</footer>
 
 <script>
@@ -618,8 +611,7 @@ const products = [
  {cat:"hidrolatos",name:"Hidrolato de diente de león",size:"30cc",price:6000,keyName:"diente_leon"},
  {cat:"hidrolatos",name:"Hidrolato de atamisqui",size:"30cc",price:6000,keyName:"atamisqui"},
  {cat:"hidrolatos",name:"Hidrolato de jarilla",size:"30cc",price:6000,keyName:"hidrolato_jarilla"},
-
- // --- TÓNICOS ---
+  // --- TÓNICOS ---
  {cat:"tonicos",name:"Bruma de rosas y manzanilla",size:"60cc",price:8000,keyName:"bruma_rosas"},
  {cat:"tonicos",name:"Agua desmaquillante de rosas y manzanilla",size:"60cc",price:8000,keyName:"agua_desmaquillante"},
 
@@ -636,7 +628,8 @@ const products = [
 const money = n => "$" + n.toLocaleString("es-AR");
 let activeCategory = "cremas";
 let activeSize = "Todos";
-  const categoryNames = {
+
+const categoryNames = {
   suplementos: "Suplementos",
   cremas: "Cremas",
   aceites: "Aceites naturales",
@@ -716,18 +709,24 @@ async function cargarStockDesdeSheet(){
     renderProducts();
   }catch(e){
     console.error("Error Sheets:",e);
-    stockCargado = true;
-    products.forEach(p => {
-      const nombreParaStock = p.sheetName || p.name;
-      const k = claveStock(nombreParaStock, p.size);
-      if(STOCK.rioja[k] === undefined) STOCK.rioja[k] = 0;
-      if(STOCK.bsas[k] === undefined) STOCK.bsas[k] = 5;
-    });
-    if(estado) estado.textContent="Stock activo (Verificación disponible).";
+    stockCargado = false;
+    if(estado) estado.textContent="No se pudo consultar Google Sheets. Revisá que la planilla esté publicada como CSV y accesible con el enlace.";
     renderProducts();
   }
 }
 
+function obtenerStock(p){
+  const nombreParaStock=p.sheetName||p.name;
+  const valor=STOCK[depositoActual]?.[claveStock(nombreParaStock,p.size)];
+  return valor===undefined?0:Math.max(0,Number(valor)||0);
+}
+function mostrarAvisoAgregado(){
+  const toast=document.getElementById("added-toast");
+  if(!toast)return;
+  toast.classList.add("show");
+  clearTimeout(window.__liamToastTimer);
+  window.__liamToastTimer=setTimeout(()=>toast.classList.remove("show"),1600);
+}
 function sizeOptions(cat){
   const all = products.filter(p => p.cat === cat).map(p => p.size);
   const seen = {};
@@ -817,24 +816,31 @@ function renderProducts(){
       showAlert("Por favor ingresá una cantidad de 1 o más.");
       return;
     }
-    // Todos los productos se pueden pedir, tengan stock o sean a pedido.
     const yaEnCarrito=cart.get(key)||0;
-    cart.set(key, yaEnCarrito + q);
+    cart.set(key, yaEnCarrito+q);
     renderCart();
     updateDirectWaLink();
-    
-    addBtn.textContent = "¡Agregado!";
-    setTimeout(() => { addBtn.textContent = "Agregar"; }, 1400);
+    mostrarAvisoAgregado();
   });
 
   const stockLabel=card.querySelector(".stock-availability");
   if(stockLabel){
-    const nombreParaStock = p.sheetName || p.name;
-    const stockVal = STOCK[depositoActual][claveStock(nombreParaStock, p.size)];
-    const n = stockVal !== undefined ? Number(stockVal) : 0;
-    stockLabel.textContent = n > 0 ? "Disponible ✅" : "A pedido 🌿";
-    stockLabel.classList.toggle("stock-in", n > 0);
-    stockLabel.classList.toggle("stock-order", n <= 0);
+    stockLabel.style.fontWeight="700";
+    if(!stockCargado){
+      stockLabel.textContent="Stock sin verificar";
+      stockLabel.classList.remove("stock-in","stock-order");
+    } else {
+      const n=obtenerStock(p);
+      if(n>0){
+        stockLabel.textContent="Disponible ✅ · "+n+" unidades";
+        stockLabel.classList.add("stock-in");
+        stockLabel.classList.remove("stock-order");
+      } else {
+        stockLabel.textContent="A pedido 🌿 · 0 disponibles · Se puede encargar";
+        stockLabel.classList.add("stock-order");
+        stockLabel.classList.remove("stock-in");
+      }
+    }
   }
   host.appendChild(card);
  });
@@ -858,7 +864,11 @@ function renderCart(){
   total+=sub;
   const line=document.createElement("div");
   line.className="cartline";
-  line.innerHTML=`<div class="details"><span class="cart-category">${categoryNames[p.cat] || p.cat}</span><strong>${p.name}</strong><div class="small">${p.size} · ${qty} unidad(es) × ${money(p.price)}</div><strong>${money(sub)}</strong></div><button class="remove" type="button" aria-label="Quitar ${p.name}">Quitar</button>`;
+  const stockActual=obtenerStock(p);
+  const estadoStock=stockActual>0
+    ? `<div class="stock-availability stock-in">Disponible ✅ · ${stockActual} unidades</div>`
+    : '<div class="stock-availability stock-order">A pedido 🌿 · 0 disponibles · Se puede encargar</div>';
+  line.innerHTML=`<div class="details"><span class="cart-category">${categoryNames[p.cat] || p.cat}</span><strong>${p.name}</strong><div class="small">${p.size} · ${qty} unidad(es) × ${money(p.price)}</div>${estadoStock}<strong>${money(sub)}</strong></div><button class="remove" type="button" aria-label="Quitar ${p.name}">Quitar</button>`;
   line.querySelector("button").addEventListener("click",()=>{
     cart.delete(key);
     renderCart();
@@ -895,9 +905,10 @@ function generateWaUrl() {
   if(!p) continue;
   const sub = p.price * qty;
   total += sub;
-  lines.push(`• *Categoría: ${categoryNames[p.cat] || p.cat}* — *${p.name}* (${p.size}) × ${qty} — ${money(sub)}`);
+  const stockActual=obtenerStock(p);
+  const estadoPedido=stockActual>0 ? `Disponible: ${stockActual} unidades` : "A PEDIDO · REALIZAR POR ENCARGO · 0 disponibles";
+  lines.push(`• *Categoría: ${categoryNames[p.cat] || p.cat}* — *${p.name}* (${p.size}) × ${qty} — ${money(sub)}\n  _${estadoPedido}_`);
  }
- 
  lines.push("",`*Subtotal de productos: ${money(total)}*`);
  if(costoEntrega > 0) lines.push(`*Costo de envío: ${money(costoEntrega)}*`,`*Total estimado con envío: ${money(total+costoEntrega)}*`);
  else lines.push("*Costo de entrega/retiro: GRATIS*",`*Total estimado: ${money(total)}*`);
@@ -958,9 +969,6 @@ document.querySelectorAll('.delivery-type').forEach(button => {
     updateDirectWaLink();
   });
 });
-   
-
-
 
 function actualizarEntregaPorDeposito() {
   const esBuenosAires = document.getElementById('deposito-stock').value === 'bsas';
