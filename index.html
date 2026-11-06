@@ -19,6 +19,9 @@ h2{font-size:1.3rem;color:var(--green);margin:12px 0}
 .card{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff;box-shadow:0 2px 8px #174d320b;display:flex;flex-direction:column;justify-content:space-between}
 .card h3{margin:0 0 6px;color:var(--green);font-size:1.06rem}
 .price{font-weight:700;color:var(--green);margin:6px 0}
+.stock-availability{font-weight:700;margin:7px 0 4px}
+.stock-availability.stock-in{color:#247a3d}
+.stock-availability.stock-order{color:#8aaa79}
 label{display:block;font-size:.9rem;margin:8px 0 4px;font-weight:600;color:var(--green)}
 select,input,textarea{width:100%;font:inherit;border:1px solid #aabda9;border-radius:9px;padding:10px;background:#fff}
 .qtyrow{display:flex;align-items:center;gap:8px;margin-top:10px}.qtyrow input{width:78px}.qtyrow button{flex:1}
@@ -318,8 +321,13 @@ body.drawer-open{overflow:hidden}
           <label class="delivery-choice"><input type="radio" name="entrega" value="Retiro gratis · Rembrandt 6648, Francisco Álvarez · todos los días 7:00 a 22:00" data-cost="0"><span><strong>Francisco Álvarez</strong><small>Rembrandt 6648 · Todos los días, 7:00 a 22:00 · GRATIS</small></span></label>
           <label class="delivery-choice"><input type="radio" name="entrega" value="Retiro gratis · Joaquín V. González 6846 y Shakespeare, Moreno · lunes a jueves 9:00 a 18:00" data-cost="0"><span><strong>Moreno</strong><small>Joaquín V. González 6846 y Shakespeare · Lunes a jueves, 9:00 a 18:00 · GRATIS</small></span></label>
         </div>
+        <div class="delivery-group" data-delivery-group="retiros" hidden>
+          <h3>🏪 Retiros gratis</h3>
+          <label class="delivery-choice"><input type="radio" name="entrega" value="Retiro gratis · Rembrandt 6648, Francisco Álvarez · todos los días 7:00 a 22:00" data-cost="0"><span><strong>Francisco Álvarez</strong><small>Rembrandt 6648 · Todos los días, 7:00 a 22:00 · GRATIS</small></span></label>
+          <label class="delivery-choice"><input type="radio" name="entrega" value="Retiro gratis · Joaquín V. González 6846 y Shakespeare, Moreno · lunes a jueves 9:00 a 18:00" data-cost="0"><span><strong>Moreno</strong><small>Joaquín V. González 6846 y Shakespeare · Lunes a jueves, 9:00 a 18:00 · GRATIS</small></span></label>
+        </div>
         <div class="delivery-group" data-delivery-group="domicilio" hidden>
-          <h3>🏍️ Envíos a domicilio en moto</h3><p class="delivery-prompt">Horario de entrega: de 9:00 a 17: 00 hs.</p>
+          <h3>🏍️ Envíos a domicilio en moto</h3><p class="delivery-prompt">Horario de entrega: de 9:00 a 17:00 hs.</p>
           <label class="delivery-choice"><input type="radio" name="entrega" value="Envío a domicilio · Zona 1 (0 a 7 km) · $4.500" data-cost="4500"><span><strong>Zona 1 · 0 a 7 km</strong><small>Trujui, Barrio 2000, La Gloria, Mariló, San Cayetano, Las Catonas centro.</small><b>$4.500</b></span></label>
           <label class="delivery-choice"><input type="radio" name="entrega" value="Envío a domicilio · Zona 2 (7 a 10 km) · $6.000" data-cost="6000"><span><strong>Zona 2 · 7 a 10 km</strong><small>Moreno Centro, La Reja Chica, Francisco Álvarez centro, B.º El Quijote, Paso del Rey centro y Villa Zapiola.</small><b>$6.000</b></span></label>
           <label class="delivery-choice"><input type="radio" name="entrega" value="Envío a domicilio · Zona 3 (10 a 13 km) · $7.500" data-cost="7500"><span><strong>Zona 3 · 10 a 13 km</strong><small>Merlo Centro, Merlo Norte, General Rodríguez centro, Reja Grande.</small><b>$7.500</b></span></label>
@@ -332,6 +340,7 @@ body.drawer-open{overflow:hidden}
         <option value="5493826512455">La Rioja · 3826 51-2455</option>
         <option value="5491122547458">Buenos Aires · 11 2254-7458</option>
       </select>
+      
       
       <label for="comentario">Comentario (opcional)</label>
       <textarea id="comentario" rows="2" placeholder="Aclaraciones, consulta, etc."></textarea>
@@ -627,8 +636,7 @@ const products = [
 const money = n => "$" + n.toLocaleString("es-AR");
 let activeCategory = "cremas";
 let activeSize = "Todos";
-
-const categoryNames = {
+  const categoryNames = {
   suplementos: "Suplementos",
   cremas: "Cremas",
   aceites: "Aceites naturales",
@@ -809,18 +817,8 @@ function renderProducts(){
       showAlert("Por favor ingresá una cantidad de 1 o más.");
       return;
     }
-    if(!stockCargado){
-      showAlert("Todavía no se pudo verificar el stock. Esperá y volvé a intentar.");
-      return;
-    }
-    const nombreParaStock = p.sheetName || p.name;
-    const stockVal = STOCK[depositoActual][claveStock(nombreParaStock, p.size)];
-    const disponible = stockVal !== undefined ? Number(stockVal) : 0;
+    // Todos los productos se pueden pedir, tengan stock o sean a pedido.
     const yaEnCarrito=cart.get(key)||0;
-    if(yaEnCarrito+q>disponible){
-      showAlert("Stock disponible en "+(depositoActual==="rioja"?"Chamical":"Moreno")+": "+disponible+" unidad(es).");
-      return;
-    }
     cart.set(key, yaEnCarrito + q);
     renderCart();
     updateDirectWaLink();
@@ -831,15 +829,12 @@ function renderProducts(){
 
   const stockLabel=card.querySelector(".stock-availability");
   if(stockLabel){
-    if(!stockCargado) stockLabel.textContent="Stock: verificando…";
-    else {
-      const nombreParaStock = p.sheetName || p.name;
-      const stockVal = STOCK[depositoActual][claveStock(nombreParaStock, p.size)];
-      const n = stockVal !== undefined ? Number(stockVal) : 0;
-      stockLabel.textContent="Disponible en "+(depositoActual==="rioja"?"Chamical":"Moreno")+": "+n;
-      stockLabel.style.fontWeight="650";
-      stockLabel.style.color=n>0?"var(--green)":"#9b2c20";
-    }
+    const nombreParaStock = p.sheetName || p.name;
+    const stockVal = STOCK[depositoActual][claveStock(nombreParaStock, p.size)];
+    const n = stockVal !== undefined ? Number(stockVal) : 0;
+    stockLabel.textContent = n > 0 ? "Disponible ✅" : "A pedido 🌿";
+    stockLabel.classList.toggle("stock-in", n > 0);
+    stockLabel.classList.toggle("stock-order", n <= 0);
   }
   host.appendChild(card);
  });
@@ -963,6 +958,9 @@ document.querySelectorAll('.delivery-type').forEach(button => {
     updateDirectWaLink();
   });
 });
+   
+
+
 
 function actualizarEntregaPorDeposito() {
   const esBuenosAires = document.getElementById('deposito-stock').value === 'bsas';
